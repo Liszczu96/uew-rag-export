@@ -1,0 +1,56 @@
+project:
+  name: uew-rag-export
+  output_directory: public
+  user_agent: "UEW-RAG-Exporter/1.0"
+  timeout_seconds: 30
+  request_delay_seconds: 1
+  max_concurrency: 2
+
+sources:
+  - id: transfer-wiedzy
+    name: Transfer Wiedzy
+    base_url: https://transferwiedzy.uew.pl
+    priority: C
+    enabled: true
+    required: true
+    adapter: wordpress
+
+  - id: uew
+    name: Główny portal UEW
+    base_url: https://uew.pl
+    priority: A
+    enabled: true
+    required: true
+    adapter: auto
+
+  - id: rekrutacja
+    name: Rekrutacja UEW
+    base_url: https://rekrutacja.uew.pl
+    priority: A
+    enabled: true
+    required: true
+    adapter: auto
+
+  - id: bon
+    name: Biuro Obsługi Osób z Niepełnosprawnościami
+    base_url: https://bon.uew.pl
+    priority: A
+    enabled: true
+    required: true
+    adapter: auto
+
+  - id: szkola-doktorska
+    name: Szkoła Doktorska
+    base_url: https://sd.uew.pl
+    priority: A
+    enabled: true
+    required: true
+    adapter: auto
+
+  - id: international
+    name: International UEW
+    base_url: https://international.uew.pl
+    priority: A
+    enabled: false
+    required: false
+    adapter: auto
