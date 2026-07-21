@@ -1,0 +1,667 @@
+{
+  "project": "uew-rag-export",
+  "generated_at": "2026-07-21T17:21:04.606447+00:00",
+  "source_count": 6,
+  "sources": [
+    {
+      "source_id": "transfer-wiedzy",
+      "source_name": "Transfer Wiedzy",
+      "base_url": "https://transferwiedzy.uew.pl",
+      "priority": "C",
+      "enabled": true,
+      "required": true,
+      "configured_adapter": "wordpress",
+      "checked_at": "2026-07-21T17:19:48.082112+00:00",
+      "homepage": {
+        "requested_url": "https://transferwiedzy.uew.pl",
+        "final_url": "https://transferwiedzy.uew.pl/",
+        "status_code": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "ok": true,
+        "error": null
+      },
+      "robots": {
+        "requested_url": "https://transferwiedzy.uew.pl/robots.txt",
+        "final_url": "https://transferwiedzy.uew.pl/robots.txt",
+        "status_code": 404,
+        "content_type": "text/html",
+        "ok": false,
+        "error": null
+      },
+      "wordpress": {
+        "available": true,
+        "root": {
+          "requested_url": "https://transferwiedzy.uew.pl/wp-json/",
+          "final_url": "https://transferwiedzy.uew.pl/wp-json/",
+          "status_code": 200,
+          "content_type": "application/json; charset=UTF-8",
+          "ok": true,
+          "error": null,
+          "valid_json": true,
+          "item_count": 16
+        },
+        "available_endpoints": [
+          "pages",
+          "posts",
+          "media"
+        ],
+        "endpoints": {
+          "pages": {
+            "requested_url": "https://transferwiedzy.uew.pl/wp-json/wp/v2/pages?per_page=1",
+            "final_url": "https://transferwiedzy.uew.pl/wp-json/wp/v2/pages?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          },
+          "posts": {
+            "requested_url": "https://transferwiedzy.uew.pl/wp-json/wp/v2/posts?per_page=1",
+            "final_url": "https://transferwiedzy.uew.pl/wp-json/wp/v2/posts?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          },
+          "media": {
+            "requested_url": "https://transferwiedzy.uew.pl/wp-json/wp/v2/media?per_page=1",
+            "final_url": "https://transferwiedzy.uew.pl/wp-json/wp/v2/media?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          }
+        }
+      },
+      "sitemap": {
+        "available": false,
+        "url": null,
+        "checks": [
+          {
+            "requested_url": "https://transferwiedzy.uew.pl/sitemap.xml",
+            "final_url": "https://transferwiedzy.uew.pl/sitemap.xml",
+            "status_code": 404,
+            "content_type": "text/html",
+            "ok": false,
+            "error": null,
+            "valid_sitemap": false
+          },
+          {
+            "requested_url": "https://transferwiedzy.uew.pl/wp-sitemap.xml",
+            "final_url": "https://transferwiedzy.uew.pl/wp-sitemap.xml",
+            "status_code": 200,
+            "content_type": "text/html; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_sitemap": false
+          },
+          {
+            "requested_url": "https://transferwiedzy.uew.pl/sitemap_index.xml",
+            "final_url": "https://transferwiedzy.uew.pl/sitemap_index.xml",
+            "status_code": 404,
+            "content_type": "text/html; charset=UTF-8",
+            "ok": false,
+            "error": null,
+            "valid_sitemap": false
+          }
+        ]
+      },
+      "recommended_adapter": "wordpress"
+    },
+    {
+      "source_id": "uew",
+      "source_name": "Główny portal UEW",
+      "base_url": "https://uew.pl",
+      "priority": "A",
+      "enabled": true,
+      "required": true,
+      "configured_adapter": "auto",
+      "checked_at": "2026-07-21T17:20:04.326241+00:00",
+      "homepage": {
+        "requested_url": "https://uew.pl",
+        "final_url": "https://uew.pl/",
+        "status_code": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "ok": true,
+        "error": null
+      },
+      "robots": {
+        "requested_url": "https://uew.pl/robots.txt",
+        "final_url": "https://uew.pl/robots.txt",
+        "status_code": 404,
+        "content_type": "text/html",
+        "ok": false,
+        "error": null
+      },
+      "wordpress": {
+        "available": true,
+        "root": {
+          "requested_url": "https://uew.pl/wp-json/",
+          "final_url": "https://uew.pl/wp-json/",
+          "status_code": 200,
+          "content_type": "application/json; charset=UTF-8",
+          "ok": true,
+          "error": null,
+          "valid_json": true,
+          "item_count": 16
+        },
+        "available_endpoints": [
+          "pages",
+          "posts",
+          "media"
+        ],
+        "endpoints": {
+          "pages": {
+            "requested_url": "https://uew.pl/wp-json/wp/v2/pages?per_page=1",
+            "final_url": "https://uew.pl/wp-json/wp/v2/pages?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          },
+          "posts": {
+            "requested_url": "https://uew.pl/wp-json/wp/v2/posts?per_page=1",
+            "final_url": "https://uew.pl/wp-json/wp/v2/posts?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          },
+          "media": {
+            "requested_url": "https://uew.pl/wp-json/wp/v2/media?per_page=1",
+            "final_url": "https://uew.pl/wp-json/wp/v2/media?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          }
+        }
+      },
+      "sitemap": {
+        "available": false,
+        "url": null,
+        "checks": [
+          {
+            "requested_url": "https://uew.pl/sitemap.xml",
+            "final_url": "https://uew.pl/sitemap.xml",
+            "status_code": 404,
+            "content_type": "text/html",
+            "ok": false,
+            "error": null,
+            "valid_sitemap": false
+          },
+          {
+            "requested_url": "https://uew.pl/wp-sitemap.xml",
+            "final_url": "https://uew.pl/wp-sitemap.xml",
+            "status_code": 200,
+            "content_type": "text/html; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_sitemap": false
+          },
+          {
+            "requested_url": "https://uew.pl/sitemap_index.xml",
+            "final_url": "https://uew.pl/sitemap_index.xml",
+            "status_code": 404,
+            "content_type": "text/html; charset=UTF-8",
+            "ok": false,
+            "error": null,
+            "valid_sitemap": false
+          }
+        ]
+      },
+      "recommended_adapter": "wordpress"
+    },
+    {
+      "source_id": "rekrutacja",
+      "source_name": "Rekrutacja UEW",
+      "base_url": "https://rekrutacja.uew.pl",
+      "priority": "A",
+      "enabled": true,
+      "required": true,
+      "configured_adapter": "auto",
+      "checked_at": "2026-07-21T17:20:21.152841+00:00",
+      "homepage": {
+        "requested_url": "https://rekrutacja.uew.pl",
+        "final_url": "https://rekrutacja.uew.pl/",
+        "status_code": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "ok": true,
+        "error": null
+      },
+      "robots": {
+        "requested_url": "https://rekrutacja.uew.pl/robots.txt",
+        "final_url": "https://rekrutacja.uew.pl/robots.txt",
+        "status_code": 404,
+        "content_type": "text/html",
+        "ok": false,
+        "error": null
+      },
+      "wordpress": {
+        "available": true,
+        "root": {
+          "requested_url": "https://rekrutacja.uew.pl/wp-json/",
+          "final_url": "https://rekrutacja.uew.pl/wp-json/",
+          "status_code": 200,
+          "content_type": "application/json; charset=UTF-8",
+          "ok": true,
+          "error": null,
+          "valid_json": true,
+          "item_count": 16
+        },
+        "available_endpoints": [
+          "pages",
+          "posts",
+          "media"
+        ],
+        "endpoints": {
+          "pages": {
+            "requested_url": "https://rekrutacja.uew.pl/wp-json/wp/v2/pages?per_page=1",
+            "final_url": "https://rekrutacja.uew.pl/wp-json/wp/v2/pages?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          },
+          "posts": {
+            "requested_url": "https://rekrutacja.uew.pl/wp-json/wp/v2/posts?per_page=1",
+            "final_url": "https://rekrutacja.uew.pl/wp-json/wp/v2/posts?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          },
+          "media": {
+            "requested_url": "https://rekrutacja.uew.pl/wp-json/wp/v2/media?per_page=1",
+            "final_url": "https://rekrutacja.uew.pl/wp-json/wp/v2/media?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          }
+        }
+      },
+      "sitemap": {
+        "available": false,
+        "url": null,
+        "checks": [
+          {
+            "requested_url": "https://rekrutacja.uew.pl/sitemap.xml",
+            "final_url": "https://rekrutacja.uew.pl/sitemap.xml",
+            "status_code": 404,
+            "content_type": "text/html",
+            "ok": false,
+            "error": null,
+            "valid_sitemap": false
+          },
+          {
+            "requested_url": "https://rekrutacja.uew.pl/wp-sitemap.xml",
+            "final_url": "https://rekrutacja.uew.pl/wp-sitemap.xml",
+            "status_code": 200,
+            "content_type": "text/html; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_sitemap": false
+          },
+          {
+            "requested_url": "https://rekrutacja.uew.pl/sitemap_index.xml",
+            "final_url": "https://rekrutacja.uew.pl/sitemap_index.xml",
+            "status_code": 404,
+            "content_type": "text/html; charset=UTF-8",
+            "ok": false,
+            "error": null,
+            "valid_sitemap": false
+          }
+        ]
+      },
+      "recommended_adapter": "wordpress"
+    },
+    {
+      "source_id": "bon",
+      "source_name": "Biuro Obsługi Osób z Niepełnosprawnościami",
+      "base_url": "https://bon.uew.pl",
+      "priority": "A",
+      "enabled": true,
+      "required": true,
+      "configured_adapter": "auto",
+      "checked_at": "2026-07-21T17:20:36.255265+00:00",
+      "homepage": {
+        "requested_url": "https://bon.uew.pl",
+        "final_url": "https://bon.uew.pl/",
+        "status_code": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "ok": true,
+        "error": null
+      },
+      "robots": {
+        "requested_url": "https://bon.uew.pl/robots.txt",
+        "final_url": "https://bon.uew.pl/robots.txt",
+        "status_code": 404,
+        "content_type": "text/html",
+        "ok": false,
+        "error": null
+      },
+      "wordpress": {
+        "available": true,
+        "root": {
+          "requested_url": "https://bon.uew.pl/wp-json/",
+          "final_url": "https://bon.uew.pl/wp-json/",
+          "status_code": 200,
+          "content_type": "application/json; charset=UTF-8",
+          "ok": true,
+          "error": null,
+          "valid_json": true,
+          "item_count": 16
+        },
+        "available_endpoints": [
+          "pages",
+          "posts",
+          "media"
+        ],
+        "endpoints": {
+          "pages": {
+            "requested_url": "https://bon.uew.pl/wp-json/wp/v2/pages?per_page=1",
+            "final_url": "https://bon.uew.pl/wp-json/wp/v2/pages?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          },
+          "posts": {
+            "requested_url": "https://bon.uew.pl/wp-json/wp/v2/posts?per_page=1",
+            "final_url": "https://bon.uew.pl/wp-json/wp/v2/posts?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          },
+          "media": {
+            "requested_url": "https://bon.uew.pl/wp-json/wp/v2/media?per_page=1",
+            "final_url": "https://bon.uew.pl/wp-json/wp/v2/media?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          }
+        }
+      },
+      "sitemap": {
+        "available": false,
+        "url": null,
+        "checks": [
+          {
+            "requested_url": "https://bon.uew.pl/sitemap.xml",
+            "final_url": "https://bon.uew.pl/sitemap.xml",
+            "status_code": 404,
+            "content_type": "text/html",
+            "ok": false,
+            "error": null,
+            "valid_sitemap": false
+          },
+          {
+            "requested_url": "https://bon.uew.pl/wp-sitemap.xml",
+            "final_url": "https://bon.uew.pl/wp-sitemap.xml",
+            "status_code": 200,
+            "content_type": "text/html; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_sitemap": false
+          },
+          {
+            "requested_url": "https://bon.uew.pl/sitemap_index.xml",
+            "final_url": "https://bon.uew.pl/sitemap_index.xml",
+            "status_code": 404,
+            "content_type": "text/html; charset=UTF-8",
+            "ok": false,
+            "error": null,
+            "valid_sitemap": false
+          }
+        ]
+      },
+      "recommended_adapter": "wordpress"
+    },
+    {
+      "source_id": "szkola-doktorska",
+      "source_name": "Szkoła Doktorska",
+      "base_url": "https://sd.uew.pl",
+      "priority": "A",
+      "enabled": true,
+      "required": true,
+      "configured_adapter": "auto",
+      "checked_at": "2026-07-21T17:20:50.397107+00:00",
+      "homepage": {
+        "requested_url": "https://sd.uew.pl",
+        "final_url": "https://sd.uew.pl/",
+        "status_code": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "ok": true,
+        "error": null
+      },
+      "robots": {
+        "requested_url": "https://sd.uew.pl/robots.txt",
+        "final_url": "https://sd.uew.pl/robots.txt",
+        "status_code": 404,
+        "content_type": "text/html",
+        "ok": false,
+        "error": null
+      },
+      "wordpress": {
+        "available": true,
+        "root": {
+          "requested_url": "https://sd.uew.pl/wp-json/",
+          "final_url": "https://sd.uew.pl/wp-json/",
+          "status_code": 200,
+          "content_type": "application/json; charset=UTF-8",
+          "ok": true,
+          "error": null,
+          "valid_json": true,
+          "item_count": 16
+        },
+        "available_endpoints": [
+          "pages",
+          "posts",
+          "media"
+        ],
+        "endpoints": {
+          "pages": {
+            "requested_url": "https://sd.uew.pl/wp-json/wp/v2/pages?per_page=1",
+            "final_url": "https://sd.uew.pl/wp-json/wp/v2/pages?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          },
+          "posts": {
+            "requested_url": "https://sd.uew.pl/wp-json/wp/v2/posts?per_page=1",
+            "final_url": "https://sd.uew.pl/wp-json/wp/v2/posts?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          },
+          "media": {
+            "requested_url": "https://sd.uew.pl/wp-json/wp/v2/media?per_page=1",
+            "final_url": "https://sd.uew.pl/wp-json/wp/v2/media?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          }
+        }
+      },
+      "sitemap": {
+        "available": false,
+        "url": null,
+        "checks": [
+          {
+            "requested_url": "https://sd.uew.pl/sitemap.xml",
+            "final_url": "https://sd.uew.pl/sitemap.xml",
+            "status_code": 404,
+            "content_type": "text/html",
+            "ok": false,
+            "error": null,
+            "valid_sitemap": false
+          },
+          {
+            "requested_url": "https://sd.uew.pl/wp-sitemap.xml",
+            "final_url": "https://sd.uew.pl/wp-sitemap.xml",
+            "status_code": 200,
+            "content_type": "text/html; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_sitemap": false
+          },
+          {
+            "requested_url": "https://sd.uew.pl/sitemap_index.xml",
+            "final_url": "https://sd.uew.pl/sitemap_index.xml",
+            "status_code": 404,
+            "content_type": "text/html; charset=UTF-8",
+            "ok": false,
+            "error": null,
+            "valid_sitemap": false
+          }
+        ]
+      },
+      "recommended_adapter": "wordpress"
+    },
+    {
+      "source_id": "international",
+      "source_name": "International UEW",
+      "base_url": "https://international.uew.pl",
+      "priority": "A",
+      "enabled": false,
+      "required": false,
+      "configured_adapter": "auto",
+      "checked_at": "2026-07-21T17:21:04.606425+00:00",
+      "homepage": {
+        "requested_url": "https://international.uew.pl",
+        "final_url": "https://international.uew.pl/",
+        "status_code": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "ok": true,
+        "error": null
+      },
+      "robots": {
+        "requested_url": "https://international.uew.pl/robots.txt",
+        "final_url": "https://international.uew.pl/robots.txt",
+        "status_code": 404,
+        "content_type": "text/html",
+        "ok": false,
+        "error": null
+      },
+      "wordpress": {
+        "available": true,
+        "root": {
+          "requested_url": "https://international.uew.pl/wp-json/",
+          "final_url": "https://international.uew.pl/wp-json/",
+          "status_code": 200,
+          "content_type": "application/json; charset=UTF-8",
+          "ok": true,
+          "error": null,
+          "valid_json": true,
+          "item_count": 16
+        },
+        "available_endpoints": [
+          "pages",
+          "posts",
+          "media"
+        ],
+        "endpoints": {
+          "pages": {
+            "requested_url": "https://international.uew.pl/wp-json/wp/v2/pages?per_page=1",
+            "final_url": "https://international.uew.pl/wp-json/wp/v2/pages?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          },
+          "posts": {
+            "requested_url": "https://international.uew.pl/wp-json/wp/v2/posts?per_page=1",
+            "final_url": "https://international.uew.pl/wp-json/wp/v2/posts?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          },
+          "media": {
+            "requested_url": "https://international.uew.pl/wp-json/wp/v2/media?per_page=1",
+            "final_url": "https://international.uew.pl/wp-json/wp/v2/media?per_page=1",
+            "status_code": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_json": true,
+            "item_count": 1
+          }
+        }
+      },
+      "sitemap": {
+        "available": false,
+        "url": null,
+        "checks": [
+          {
+            "requested_url": "https://international.uew.pl/sitemap.xml",
+            "final_url": "https://international.uew.pl/sitemap.xml",
+            "status_code": 404,
+            "content_type": "text/html",
+            "ok": false,
+            "error": null,
+            "valid_sitemap": false
+          },
+          {
+            "requested_url": "https://international.uew.pl/wp-sitemap.xml",
+            "final_url": "https://international.uew.pl/wp-sitemap.xml",
+            "status_code": 200,
+            "content_type": "text/html; charset=UTF-8",
+            "ok": true,
+            "error": null,
+            "valid_sitemap": false
+          },
+          {
+            "requested_url": "https://international.uew.pl/sitemap_index.xml",
+            "final_url": "https://international.uew.pl/sitemap_index.xml",
+            "status_code": 404,
+            "content_type": "text/html; charset=UTF-8",
+            "ok": false,
+            "error": null,
+            "valid_sitemap": false
+          }
+        ]
+      },
+      "recommended_adapter": "wordpress"
+    }
+  ]
+}
