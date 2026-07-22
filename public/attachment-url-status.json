@@ -1,0 +1,69 @@
+{
+  "candidate_count": 1081,
+  "reachable_count": 1068,
+  "valid_document_count": 1062,
+  "invalid_or_unreachable_count": 19,
+  "result_counts": {
+    "http_error": 11,
+    "invalid_content_type": 6,
+    "network_error": 2,
+    "ok": 1062
+  },
+  "http_status_counts": {
+    "200": 951,
+    "206": 117,
+    "403": 4,
+    "404": 7
+  },
+  "candidate_types": {
+    "institutional_unregistered": 188,
+    "registered_linked": 893
+  },
+  "sources": {
+    "badania.uew.pl": {
+      "ok": 1
+    },
+    "bon": {
+      "ok": 26
+    },
+    "international.uew.pl": {
+      "ok": 1
+    },
+    "jg.uew.pl": {
+      "ok": 2
+    },
+    "rekrutacja": {
+      "ok": 164
+    },
+    "rekrutacja.uew.pl": {
+      "ok": 1
+    },
+    "sd.ue.wroc.pl": {
+      "http_error": 6
+    },
+    "sd.uew.pl": {
+      "invalid_content_type": 1
+    },
+    "szkola-doktorska": {
+      "ok": 177
+    },
+    "thinktank.ue.wroc.pl": {
+      "network_error": 2
+    },
+    "transfer-wiedzy": {
+      "ok": 20
+    },
+    "uew": {
+      "ok": 506
+    },
+    "uew.pl": {
+      "http_error": 1,
+      "invalid_content_type": 5,
+      "ok": 164
+    },
+    "www.ue.wroc.pl": {
+      "http_error": 4
+    }
+  },
+  "output_file": "public/rag/attachment-url-validation.jsonl"
+}
