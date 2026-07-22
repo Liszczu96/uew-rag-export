@@ -21,7 +21,7 @@ sources:
     priority: A
     enabled: true
     required: true
-    adapter: auto
+    adapter: wordpress
 
   - id: rekrutacja
     name: Rekrutacja UEW
@@ -29,7 +29,7 @@ sources:
     priority: A
     enabled: true
     required: true
-    adapter: auto
+    adapter: wordpress
 
   - id: bon
     name: Biuro Obsługi Osób z Niepełnosprawnościami
@@ -37,7 +37,7 @@ sources:
     priority: A
     enabled: true
     required: true
-    adapter: auto
+    adapter: wordpress
 
   - id: szkola-doktorska
     name: Szkoła Doktorska
@@ -45,7 +45,7 @@ sources:
     priority: A
     enabled: true
     required: true
-    adapter: auto
+    adapter: wordpress
 
   - id: international
     name: International UEW
@@ -53,4 +53,4 @@ sources:
     priority: A
     enabled: false
     required: false
-    adapter: auto
+    adapter: wordpress
