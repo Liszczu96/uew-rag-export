@@ -706,26 +706,17 @@ def main() -> None:
             print("  Załączniki z biblioteki mediów")
 
             try:
-                media_items_by_id: dict[int, dict[str, Any]] = {}
+                print("    kategoria MIME: application")
 
-                for media_type in ("application", "text"):
-                    print(f"    kategoria MIME: {media_type}")
-
-                    media_items = fetch_collection(
-                        session=session,
-                        endpoint=endpoint,
-                        timeout=timeout,
-                        request_delay=request_delay,
-                        extra_params={
-                            "media_type": media_type,
-                        },
-                    )
-
-                    for item in media_items:
-                        item_id = item.get("id")
-
-                        if isinstance(item_id, int):
-                            media_items_by_id[item_id] = item
+                media_items = fetch_collection(
+                    session=session,
+                    endpoint=endpoint,
+                    timeout=timeout,
+                    request_delay=request_delay,
+                    extra_params={
+                        "media_type": "application",
+                    },
+                )
 
                 source_attachments = [
                     build_attachment(
@@ -733,7 +724,7 @@ def main() -> None:
                         source,
                         fetched_at,
                     )
-                    for item in media_items_by_id.values()
+                    for item in media_items
                     if (
                         not document_mime_types
                         or str(
