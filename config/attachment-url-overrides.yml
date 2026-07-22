@@ -1,0 +1,56 @@
+version: 1
+supported_document_types:
+- extension: .odt
+  mime_type: application/vnd.oasis.opendocument.text
+  parser: odt
+  reason: Aktualny i osiągalny dokument Szkoły Doktorskiej.
+replacements:
+- from: https://sd.ue.wroc.pl/wp-content/uploads/2022/03/IPB-dla-III-Edycji.pdf
+  to: https://sd.uew.pl/wp-content/uploads/sites/59/2024/01/IPB-dla-III-Edycji.pdf
+  reason: Ten sam plik znajduje się w aktualnej bibliotece mediów Szkoły Doktorskiej.
+- from: https://sd.ue.wroc.pl/wp-content/uploads/2022/03/Uchwal-nr-1-z-30.01.2020-1-strona.pdf
+  to: https://sd.uew.pl/wp-content/uploads/sites/59/2024/01/Uchwal-nr-1-z-30.01.2020-1-strona.pdf
+  reason: Ten sam plik znajduje się w aktualnej bibliotece mediów Szkoły Doktorskiej.
+- from: https://sd.ue.wroc.pl/wp-content/uploads/2022/03/Zalacznik-do-Uchwaly-nr-1-z-30.01.2020.pdf
+  to: https://sd.uew.pl/wp-content/uploads/sites/59/2024/01/Zalacznik-do-Uchwaly-nr-1-z-30.01.2020.pdf
+  reason: Ten sam plik znajduje się w aktualnej bibliotece mediów Szkoły Doktorskiej.
+- from: https://sd.ue.wroc.pl/wp-content/uploads/2022/03/Zalacznik-do-Uchwaly-nr-2-z-30.01.2020.pdf
+  to: https://sd.uew.pl/wp-content/uploads/sites/59/2024/01/Zalacznik-do-Uchwaly-nr-2-z-30.01.2020.pdf
+  reason: Ten sam plik znajduje się w aktualnej bibliotece mediów Szkoły Doktorskiej.
+- from: https://sd.ue.wroc.pl/wp-content/uploads/2023/04/zalacznik-nr-2-do-Pisma-Okolnego-Dziekana-Nr-2-2023-Raport-z-postepu-realizacji-rozprawy-doktorskiej.pdf
+  to: https://sd.uew.pl/wp-content/uploads/sites/59/2024/01/zalacznik-nr-2-do-Pisma-Okolnego-Dziekana-Nr-2-2023-Raport-z-postepu-realizacji-rozprawy-doktorskiej.pdf
+  reason: Ten sam plik znajduje się w aktualnej bibliotece mediów Szkoły Doktorskiej.
+- from: https://uew.pl/wp-content/uploads/2023/02/strategia_2030.pdf
+  to: https://uew.pl/wp-content/uploads/2025/12/Strategia_2030_PL_final.pdf
+  reason: Aktualna polska wersja Strategii UEW 2030 w bibliotece mediów.
+- from: https://www.ue.wroc.pl/p/0-2023_aktualnosci/prme_2020-2022.pdf
+  to: https://uew.pl/wp-content/uploads/2023/09/PRME-2020-2022.pdf
+  reason: Ten sam raport znajduje się w aktualnej bibliotece mediów UEW.
+exclude_from_rag:
+- url: https://uew.pl/wp-content/uploads/2024/03/Poppins.zip
+  reason: Archiwum z fontem; brak wartości tekstowej dla RAG.
+- url: https://uew.pl/wp-content/uploads/2024/03/Sygnet.zip
+  reason: Archiwum z materiałami identyfikacji wizualnej; nie indeksować.
+- url: https://uew.pl/wp-content/uploads/2024/03/UEW.zip
+  reason: Archiwum z logotypami; nie indeksować.
+- url: https://uew.pl/wp-content/uploads/2024/03/WUEB.zip
+  reason: Archiwum z logotypami; nie indeksować.
+- url: https://uew.pl/wp-content/uploads/2026/03/MS-Teams_tlo.zip
+  reason: Archiwum z tłem graficznym; brak wartości tekstowej dla RAG.
+retry_with_browser_get:
+- url: https://www.ue.wroc.pl/p/0-2023_aktualnosci/controllingdayzaproszenie2023.pdf
+  reason: HTTP 403; ponowić pełnym GET bez nagłówka Range i z przeglądarkowym User-Agent.
+- url: https://www.ue.wroc.pl/p/0-2023_aktualnosci/sitwa_2023_informacja_prasowa.docx
+  reason: HTTP 403; ponowić pełnym GET bez nagłówka Range i z przeglądarkowym User-Agent.
+- url: https://www.ue.wroc.pl/p/rekrutacja/BIPS/Tutorzy/jaremen_daria.pdf
+  reason: HTTP 403; ponowić pełnym GET bez nagłówka Range i z przeglądarkowym User-Agent.
+manual_review:
+- url: https://sd.ue.wroc.pl/wp-content/uploads/2023/04/Pismo-Okolne-Dziekana-Nr-2-2023-w-sprawie-w-sprawie-szczegolowego-trybu-oceny-srodokresowej-dla-2.-edycji-doktorantow.pdf
+  reason: Brak pliku dla 2. edycji w aktualnej bibliotece. Nie podmieniać na dokument 3. edycji.
+  recommended_action: Poprawić link na stronie lub przywrócić właściwy dokument.
+- url: https://thinktank.ue.wroc.pl/wp-content/uploads/2024/06/Impakt_nr-1_2024_internet.pdf
+  reason: Nieprawidłowy łańcuch certyfikatu TLS.
+  recommended_action: Naprawić certyfikat serwera; nie wyłączać weryfikacji TLS.
+- url: https://thinktank.ue.wroc.pl/wp-content/uploads/2025/06/Impakt_nr_01_2025.pdf
+  reason: Nieprawidłowy łańcuch certyfikatu TLS.
+  recommended_action: Naprawić certyfikat serwera; nie wyłączać weryfikacji TLS.
