@@ -614,6 +614,15 @@ def main() -> None:
         )
     )
 
+    document_mime_types = {
+        str(mime_type).lower()
+        for mime_type in export_config.get(
+            "document_mime_types",
+            [],
+        )
+        if mime_type
+    }
+
     session = requests.Session()
 
     session.headers.update(
@@ -697,15 +706,26 @@ def main() -> None:
             print("  Załączniki z biblioteki mediów")
 
             try:
-                media_items = fetch_collection(
-                    session=session,
-                    endpoint=endpoint,
-                    timeout=timeout,
-                    request_delay=request_delay,
-                    extra_params={
-                        "media_type": "file",
-                    },
-                )
+                media_items_by_id: dict[int, dict[str, Any]] = {}
+
+                for media_type in ("application", "text"):
+                    print(f"    kategoria MIME: {media_type}")
+
+                    media_items = fetch_collection(
+                        session=session,
+                        endpoint=endpoint,
+                        timeout=timeout,
+                        request_delay=request_delay,
+                        extra_params={
+                            "media_type": media_type,
+                        },
+                    )
+
+                    for item in media_items:
+                        item_id = item.get("id")
+
+                        if isinstance(item_id, int):
+                            media_items_by_id[item_id] = item
 
                 source_attachments = [
                     build_attachment(
@@ -713,12 +733,13 @@ def main() -> None:
                         source,
                         fetched_at,
                     )
-                    for item in media_items
+                    for item in media_items_by_id.values()
                     if (
-                        item.get("media_type") == "file"
-                        or not str(
+                        not document_mime_types
+                        or str(
                             item.get("mime_type", "")
-                        ).startswith("image/")
+                        ).lower()
+                        in document_mime_types
                     )
                 ]
 
