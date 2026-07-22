@@ -1,0 +1,53 @@
+name: Build UEW attachment manifest
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uew-attachment-manifest
+  cancel-in-progress: false
+
+jobs:
+  build-manifest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v6
+
+      - name: Ustaw Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Sprawdź składnię skryptu
+        run: python -m py_compile scripts/build_attachment_manifest.py
+
+      - name: Zbuduj manifest załączników
+        run: python scripts/build_attachment_manifest.py
+
+      - name: Pokaż podsumowanie
+        run: |
+          echo "===== STATUS ZAŁĄCZNIKÓW ====="
+          cat public/attachment-status.json
+
+      - name: Zapisz wyniki w repozytorium
+        run: |
+          git config user.name "uew-rag-export-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add \
+            public/rag/attachment-manifest.jsonl \
+            public/rag/unregistered-attachment-links.jsonl \
+            public/attachment-status.json
+
+          if git diff --cached --quiet; then
+            echo "Brak zmian do zapisania."
+          else
+            git commit -m "Update UEW attachment manifest"
+            git push
+          fi
