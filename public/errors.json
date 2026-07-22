@@ -3,30 +3,30 @@
     "source_id": "transfer-wiedzy",
     "content_type": "media_files",
     "endpoint": "https://transferwiedzy.uew.pl/wp-json/wp/v2/media",
-    "error": "Nie udało się pobrać https://transferwiedzy.uew.pl/wp-json/wp/v2/media: 400 Client Error: Bad Request for url: https://transferwiedzy.uew.pl/wp-json/wp/v2/media?per_page=100&page=1&orderby=id&order=asc&media_type=file"
+    "error": "Nie udało się pobrać https://transferwiedzy.uew.pl/wp-json/wp/v2/media: 400 Client Error: Bad Request for url: https://transferwiedzy.uew.pl/wp-json/wp/v2/media?per_page=100&page=1&orderby=id&order=asc&media_type=text"
   },
   {
     "source_id": "uew",
     "content_type": "media_files",
     "endpoint": "https://uew.pl/wp-json/wp/v2/media",
-    "error": "Nie udało się pobrać https://uew.pl/wp-json/wp/v2/media: 400 Client Error: Bad Request for url: https://uew.pl/wp-json/wp/v2/media?per_page=100&page=1&orderby=id&order=asc&media_type=file"
+    "error": "Nie udało się pobrać https://uew.pl/wp-json/wp/v2/media: 400 Client Error: Bad Request for url: https://uew.pl/wp-json/wp/v2/media?per_page=100&page=1&orderby=id&order=asc&media_type=text"
   },
   {
     "source_id": "rekrutacja",
     "content_type": "media_files",
     "endpoint": "https://rekrutacja.uew.pl/wp-json/wp/v2/media",
-    "error": "Nie udało się pobrać https://rekrutacja.uew.pl/wp-json/wp/v2/media: 400 Client Error: Bad Request for url: https://rekrutacja.uew.pl/wp-json/wp/v2/media?per_page=100&page=1&orderby=id&order=asc&media_type=file"
+    "error": "Nie udało się pobrać https://rekrutacja.uew.pl/wp-json/wp/v2/media: 400 Client Error: Bad Request for url: https://rekrutacja.uew.pl/wp-json/wp/v2/media?per_page=100&page=1&orderby=id&order=asc&media_type=text"
   },
   {
     "source_id": "bon",
     "content_type": "media_files",
     "endpoint": "https://bon.uew.pl/wp-json/wp/v2/media",
-    "error": "Nie udało się pobrać https://bon.uew.pl/wp-json/wp/v2/media: 400 Client Error: Bad Request for url: https://bon.uew.pl/wp-json/wp/v2/media?per_page=100&page=1&orderby=id&order=asc&media_type=file"
+    "error": "Nie udało się pobrać https://bon.uew.pl/wp-json/wp/v2/media: 400 Client Error: Bad Request for url: https://bon.uew.pl/wp-json/wp/v2/media?per_page=100&page=1&orderby=id&order=asc&media_type=text"
   },
   {
     "source_id": "szkola-doktorska",
     "content_type": "media_files",
     "endpoint": "https://sd.uew.pl/wp-json/wp/v2/media",
-    "error": "Nie udało się pobrać https://sd.uew.pl/wp-json/wp/v2/media: 400 Client Error: Bad Request for url: https://sd.uew.pl/wp-json/wp/v2/media?per_page=100&page=1&orderby=id&order=asc&media_type=file"
+    "error": "Nie udało się pobrać https://sd.uew.pl/wp-json/wp/v2/media: 400 Client Error: Bad Request for url: https://sd.uew.pl/wp-json/wp/v2/media?per_page=100&page=1&orderby=id&order=asc&media_type=text"
   }
 ]
