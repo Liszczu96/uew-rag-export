@@ -1,0 +1,56 @@
+name: Validate UEW attachment URLs
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uew-attachment-url-validation
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v6
+
+      - name: Ustaw Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Zainstaluj zależności
+        run: pip install -r requirements.txt
+
+      - name: Sprawdź składnię skryptu
+        run: python -m py_compile scripts/validate_attachment_urls.py
+
+      - name: Zweryfikuj adresy załączników
+        run: python scripts/validate_attachment_urls.py
+
+      - name: Pokaż podsumowanie
+        run: |
+          echo "===== STATUS WALIDACJI URL ====="
+          cat public/attachment-url-status.json
+
+      - name: Zapisz wyniki w repozytorium
+        run: |
+          git config user.name "uew-rag-export-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add \
+            public/rag/attachment-url-validation.jsonl \
+            public/attachment-url-status.json
+
+          if git diff --cached --quiet; then
+            echo "Brak zmian do zapisania."
+          else
+            git commit -m "Update UEW attachment URL validation"
+            git push
+          fi
