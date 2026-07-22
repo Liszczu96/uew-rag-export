@@ -1,6 +1,6 @@
 {
   "project": "uew-rag-export",
-  "generated_at": "2026-07-22T10:46:44.590611+00:00",
+  "generated_at": "2026-07-22T11:52:15.231267+00:00",
   "format_version": "1.0",
   "files": {
     "documents": "public/rag/documents.jsonl",
