@@ -6,6 +6,22 @@ project:
   request_delay_seconds: 1
   max_concurrency: 2
 
+export:
+  include_raw_html: true
+  include_clean_text: true
+  include_acf: true
+  extract_links: true
+  collect_media_metadata: true
+
+  document_mime_types:
+    - application/pdf
+    - application/msword
+    - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+    - application/vnd.ms-powerpoint
+    - application/vnd.openxmlformats-officedocument.presentationml.presentation
+    - application/vnd.ms-excel
+    - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
 sources:
   - id: transfer-wiedzy
     name: Transfer Wiedzy
@@ -14,6 +30,9 @@ sources:
     enabled: true
     required: true
     adapter: wordpress
+    content_types:
+      - posts
+      - pages
 
   - id: uew
     name: Główny portal UEW
@@ -22,6 +41,11 @@ sources:
     enabled: true
     required: true
     adapter: wordpress
+    content_types:
+      - posts
+      - pages
+      - mec-events
+      - units
 
   - id: rekrutacja
     name: Rekrutacja UEW
@@ -30,6 +54,10 @@ sources:
     enabled: true
     required: true
     adapter: wordpress
+    content_types:
+      - posts
+      - pages
+      - courses_of_study
 
   - id: bon
     name: Biuro Obsługi Osób z Niepełnosprawnościami
@@ -38,6 +66,9 @@ sources:
     enabled: true
     required: true
     adapter: wordpress
+    content_types:
+      - posts
+      - pages
 
   - id: szkola-doktorska
     name: Szkoła Doktorska
@@ -46,6 +77,9 @@ sources:
     enabled: true
     required: true
     adapter: wordpress
+    content_types:
+      - posts
+      - pages
 
   - id: international
     name: International UEW
@@ -54,3 +88,6 @@ sources:
     enabled: false
     required: false
     adapter: wordpress
+    content_types:
+      - posts
+      - pages
