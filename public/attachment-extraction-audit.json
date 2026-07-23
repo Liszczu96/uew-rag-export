@@ -17,26 +17,29 @@
   "unreadable_blob_count": 0,
   "text_hash_mismatch_count": 0,
   "shared_blob_url_alias_count": 34,
-  "empty_text_count": 91,
-  "low_text_count": 93,
-  "ocr_queue_count": 91,
-  "total_word_count": 1344643,
-  "total_char_count": 9544331,
+  "empty_text_count": 71,
+  "low_text_count": 73,
+  "ocr_queue_count": 0,
+  "total_word_count": 1354294,
+  "total_char_count": 9612149,
   "duplicate_content_hash_group_count": 34,
   "duplicate_content_extra_copy_count": 34,
-  "duplicate_text_hash_group_count": 36,
-  "duplicate_text_extra_copy_count": 127,
+  "duplicate_text_hash_group_count": 37,
+  "duplicate_text_extra_copy_count": 108,
   "extraction_status_counts": {
-    "needs_ocr": 91,
-    "ok": 974
+    "excluded_from_rag": 64,
+    "manual_review": 7,
+    "ok": 974,
+    "ok_ocr": 20
   },
   "parser_counts": {
     "antiword": 3,
     "odfpy": 1,
     "openpyxl": 3,
-    "pypdf": 949,
+    "pypdf": 929,
     "python-docx": 103,
-    "python-pptx": 6
+    "python-pptx": 6,
+    "tesseract-ocr": 20
   },
   "extension_counts": {
     ".doc": 3,
