@@ -32,28 +32,69 @@ jobs:
         run: python -m py_compile scripts/export_sources.py
 
       - name: Uruchom eksport treści
-        run: python scripts/export_sources.py
+        run: |
+          set +e
+          python scripts/export_sources.py
+          exit_code=$?
+          echo "$exit_code" > /tmp/export_exit_code
+          exit 0
 
       - name: Pokaż podsumowanie
+        if: always()
         run: |
           echo "===== STATUS ====="
-          cat public/status.json
+
+          if [ -f public/status.json ]; then
+            cat public/status.json
+          else
+            echo "Brak public/status.json"
+          fi
 
           echo ""
           echo "===== BŁĘDY ====="
-          cat public/errors.json
+
+          if [ -f public/errors.json ]; then
+            cat public/errors.json
+          else
+            echo "Brak public/errors.json"
+          fi
 
       - name: Zapisz wyniki w repozytorium
+        if: always()
         run: |
           git config user.name "uew-rag-export-bot"
           git config user.email "actions@users.noreply.github.com"
 
-          git add \
-            public/rag \
-            public/sites \
-            public/status.json \
-            public/errors.json \
-            public/manifest.json
+          export_status="$(python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("public/status.json")
+
+          if not path.exists():
+              print("missing")
+          else:
+              status = json.loads(path.read_text(encoding="utf-8"))
+              print(status.get("export_status", "unknown"))
+          PY
+          )"
+
+          echo "Status eksportu: $export_status"
+
+          if [ "$export_status" = "ok" ]; then
+            git add \
+              public/rag \
+              public/sites \
+              public/status.json \
+              public/errors.json \
+              public/manifest.json \
+              public/changes/source-export-changes.jsonl
+          else
+            git add \
+              public/status.json \
+              public/errors.json \
+              public/manifest.json
+          fi
 
           if git diff --cached --quiet; then
             echo "Brak zmian do zapisania."
@@ -61,3 +102,15 @@ jobs:
             git commit -m "Update UEW RAG content export"
             git push
           fi
+
+      - name: Sprawdź wynik eksportu
+        if: always()
+        run: |
+          exit_code="$(cat /tmp/export_exit_code 2>/dev/null || echo 1)"
+
+          if [ "$exit_code" -ne 0 ]; then
+            echo "Eksport zakończył się błędem."
+            exit "$exit_code"
+          fi
+
+          echo "Eksport zakończył się poprawnie."
