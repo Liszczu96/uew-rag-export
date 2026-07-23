@@ -1,0 +1,99 @@
+name: Build UEW RAG corpus
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uew-rag-corpus-build
+  cancel-in-progress: false
+
+jobs:
+  build-corpus:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v6
+
+      - name: Ustaw Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Sprawdź składnię skryptu
+        run: python -m py_compile scripts/build_rag_corpus.py
+
+      - name: Zbuduj korpus RAG
+        run: |
+          python scripts/build_rag_corpus.py \
+            --max-words 350 \
+            --overlap-words 50
+
+      - name: Sprawdź integralność korpusu
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("public/rag-corpus-status.json")
+
+          if not path.exists():
+              raise SystemExit("Brak raportu public/rag-corpus-status.json")
+
+          status = json.loads(path.read_text(encoding="utf-8"))
+          corpus = status.get("corpus_counts", {})
+          integrity = status.get("integrity", {})
+
+          if corpus.get("documents", 0) <= 0:
+              raise SystemExit("Korpus nie zawiera dokumentów.")
+
+          if corpus.get("chunks", 0) <= 0:
+              raise SystemExit("Korpus nie zawiera chunków.")
+
+          if integrity.get("duplicate_document_id_count", 0) != 0:
+              raise SystemExit("Wykryto zduplikowane identyfikatory dokumentów.")
+
+          if integrity.get("duplicate_chunk_id_count", 0) != 0:
+              raise SystemExit("Wykryto zduplikowane identyfikatory chunków.")
+
+          if integrity.get("documents_without_chunks", 0) != 0:
+              raise SystemExit("Niektóre dokumenty nie mają chunków.")
+
+          print("Integralność korpusu: OK")
+          PY
+
+      - name: Pokaż podsumowanie
+        if: always()
+        run: |
+          echo "===== STATUS KORPUSU RAG ====="
+
+          if [ -f public/rag-corpus-status.json ]; then
+            cat public/rag-corpus-status.json
+          else
+            echo "Raport korpusu nie został utworzony."
+          fi
+
+      - name: Zapisz korpus w repozytorium
+        if: always()
+        run: |
+          git config user.name "uew-rag-export-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add \
+            public/rag/corpus-documents.jsonl \
+            public/rag/chunks.jsonl \
+            public/rag/corpus-state.jsonl \
+            public/rag/corpus-exclusions.jsonl \
+            public/changes/rag-corpus-changes.jsonl \
+            public/rag-corpus-status.json
+
+          if git diff --cached --quiet; then
+            echo "Brak zmian do zapisania."
+          else
+            git commit -m "Build unified UEW RAG corpus"
+            git push
+          fi
