@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-23T11:14:20.792387+00:00",
+  "chunking": {
+    "max_words": 350,
+    "overlap_words": 50,
+    "embedding_prefix": "document_title"
+  },
+  "input_counts": {
+    "web_records": 1875,
+    "attachment_index_records": 1065,
+    "previous_state_records": 0
+  },
+  "corpus_counts": {
+    "documents": 2549,
+    "web_documents": 1592,
+    "attachment_documents": 957,
+    "attachment_duplicate_records_merged": 34,
+    "chunks": 8811,
+    "exclusions": 357
+  },
+  "text_counts": {
+    "document_words": 1759167,
+    "document_characters": 12778689,
+    "chunk_words_with_overlap": 1853872,
+    "chunk_characters_with_overlap": 13373615
+  },
+  "document_kind_counts": {
+    "attachment": 957,
+    "web": 1592
+  },
+  "document_source_counts": {
+    "badania.uew.pl": 1,
+    "bon": 38,
+    "international.uew.pl": 1,
+    "jg.uew.pl": 2,
+    "rekrutacja": 431,
+    "sd.uew.pl": 1,
+    "szkola-doktorska": 266,
+    "transfer-wiedzy": 42,
+    "uew": 1617,
+    "uew.pl": 150
+  },
+  "chunk_kind_counts": {
+    "attachment": 6533,
+    "web": 2278
+  },
+  "chunk_source_counts": {
+    "badania.uew.pl": 3,
+    "bon": 270,
+    "international.uew.pl": 1,
+    "jg.uew.pl": 3,
+    "rekrutacja": 1004,
+    "sd.uew.pl": 2,
+    "szkola-doktorska": 879,
+    "transfer-wiedzy": 162,
+    "uew": 5377,
+    "uew.pl": 1110
+  },
+  "change_counts": {
+    "new": 2549
+  },
+  "exclusion_reason_counts": {
+    "excluded_from_rag": 64,
+    "low_quality_ocr": 1,
+    "low_text": 2,
+    "manual_review": 7,
+    "not_indexable": 283
+  },
+  "integrity": {
+    "duplicate_document_id_count": 0,
+    "duplicate_chunk_id_count": 0,
+    "documents_without_chunks": 0
+  },
+  "files": {
+    "documents": "public/rag/corpus-documents.jsonl",
+    "chunks": "public/rag/chunks.jsonl",
+    "state": "public/rag/corpus-state.jsonl",
+    "exclusions": "public/rag/corpus-exclusions.jsonl",
+    "changes": "public/changes/rag-corpus-changes.jsonl"
+  }
+}
