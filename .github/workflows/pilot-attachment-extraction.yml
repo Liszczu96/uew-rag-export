@@ -1,0 +1,176 @@
+name: Pilot UEW attachment extraction
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uew-attachment-extraction-pilot
+  cancel-in-progress: false
+
+jobs:
+  pilot-extraction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v6
+
+      - name: Ustaw Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Zainstaluj zależności Python
+        run: pip install -r requirements.txt
+
+      - name: Zainstaluj obsługę starych plików DOC
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y antiword
+
+      - name: Sprawdź składnię skryptu
+        run: python -m py_compile scripts/extract_attachment_text.py
+
+      - name: Przygotuj zróżnicowaną próbę dokumentów
+        run: |
+          cp \
+            public/rag/attachment-extraction-queue-final.jsonl \
+            /tmp/attachment-extraction-queue-full.jsonl
+
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+          from urllib.parse import unquote, urlsplit
+
+          queue_path = Path(
+              "public/rag/attachment-extraction-queue-final.jsonl"
+          )
+
+          limits = {
+              ".pdf": 10,
+              ".docx": 5,
+              ".doc": 1,
+              ".pptx": 2,
+              ".xlsx": 2,
+              ".odt": 1,
+          }
+
+          records = []
+
+          for line in queue_path.read_text(
+              encoding="utf-8"
+          ).splitlines():
+              if line.strip():
+                  records.append(json.loads(line))
+
+          records.sort(
+              key=lambda item: int(
+                  item.get("declared_filesize")
+                  or item.get("content_length")
+                  or 0
+              )
+          )
+
+          selected = []
+          counts = Counter()
+
+          for item in records:
+              url = str(
+                  item.get("effective_url")
+                  or item.get("final_url")
+                  or item.get("url")
+                  or ""
+              )
+
+              filename = str(
+                  item.get("filename") or ""
+              )
+
+              extension = (
+                  Path(filename).suffix.lower()
+                  or Path(
+                      unquote(urlsplit(url).path)
+                  ).suffix.lower()
+              )
+
+              if counts[extension] >= limits.get(
+                  extension,
+                  0,
+              ):
+                  continue
+
+              selected.append(item)
+              counts[extension] += 1
+
+          with queue_path.open(
+              "w",
+              encoding="utf-8",
+          ) as file:
+              for item in selected:
+                  file.write(
+                      json.dumps(
+                          item,
+                          ensure_ascii=False,
+                          separators=(",", ":"),
+                      )
+                      + "\n"
+                  )
+
+          print("Wybrano dokumentów:", len(selected))
+          print("Formaty:", dict(sorted(counts.items())))
+          PY
+
+      - name: Uruchom pilotażową ekstrakcję
+        run: |
+          python scripts/extract_attachment_text.py \
+            --limit 9999 \
+            --max-file-size-mb 30 \
+            --timeout-seconds 90
+
+      - name: Przywróć pełną kolejkę
+        run: |
+          mv \
+            /tmp/attachment-extraction-queue-full.jsonl \
+            public/rag/attachment-extraction-queue-final.jsonl
+
+      - name: Pokaż podsumowanie
+        run: |
+          echo "===== STATUS EKSTRAKCJI ====="
+          cat public/attachment-extraction-status.json
+
+          echo ""
+          echo "===== BŁĘDY EKSTRAKCJI ====="
+          if [ -s public/rag/attachment-extraction-errors.jsonl ]; then
+            cat public/rag/attachment-extraction-errors.jsonl
+          else
+            echo "Brak błędów."
+          fi
+
+      - name: Zapisz wyniki pilotażu
+        run: |
+          git config user.name "uew-rag-export-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add \
+            public/rag/attachment-text-index.jsonl \
+            public/rag/attachment-extraction-state.jsonl \
+            public/rag/attachment-extraction-errors.jsonl \
+            public/changes/attachment-text-changes.jsonl \
+            public/attachment-extraction-status.json
+
+          if [ -d public/rag/attachment-text-blobs ]; then
+            git add public/rag/attachment-text-blobs
+          fi
+
+          if git diff --cached --quiet; then
+            echo "Brak zmian do zapisania."
+          else
+            git commit -m "Add pilot UEW attachment extraction"
+            git push
+          fi
