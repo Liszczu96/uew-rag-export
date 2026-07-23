@@ -1,35 +1,20 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T10:14:57.100310+00:00",
+  "generated_at": "2026-07-23T14:02:57.684636+00:00",
   "queue_count": 1065,
-  "selected_count": 144,
+  "selected_count": 0,
   "full_run": false,
-  "previous_index_count": 921,
+  "previous_index_count": 1065,
   "current_index_count": 1065,
-  "processed_successfully_count": 144,
+  "processed_successfully_count": 0,
   "error_count": 0,
   "deleted_count": 0,
-  "result_counts": {
-    "new": 144
-  },
-  "extraction_status_counts": {
-    "needs_ocr": 11,
-    "ok": 133
-  },
-  "selected_extension_counts": {
-    ".docx": 34,
-    ".pdf": 106,
-    ".pptx": 4
-  },
-  "selected_source_counts": {
-    "bon": 3,
-    "rekrutacja": 14,
-    "szkola-doktorska": 54,
-    "transfer-wiedzy": 2,
-    "uew": 71
-  },
-  "downloaded_bytes": 419896609,
-  "downloaded_megabytes": 400.44,
+  "result_counts": {},
+  "extraction_status_counts": {},
+  "selected_extension_counts": {},
+  "selected_source_counts": {},
+  "downloaded_bytes": 0,
+  "downloaded_megabytes": 0.0,
   "files": {
     "index": "public/rag/attachment-text-index.jsonl",
     "state": "public/rag/attachment-extraction-state.jsonl",
