@@ -1,0 +1,57 @@
+name: Build UEW attachment extraction queue
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uew-attachment-extraction-queue
+  cancel-in-progress: false
+
+jobs:
+  build-queue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v6
+
+      - name: Ustaw Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Zainstaluj zależności
+        run: pip install -r requirements.txt
+
+      - name: Sprawdź składnię skryptu
+        run: python -m py_compile scripts/build_attachment_extraction_queue.py
+
+      - name: Zbuduj kolejkę ekstrakcji
+        run: python scripts/build_attachment_extraction_queue.py
+
+      - name: Pokaż podsumowanie
+        run: |
+          echo "===== STATUS KOLEJKI EKSTRAKCJI ====="
+          cat public/attachment-resolution-status.json
+
+      - name: Zapisz wyniki w repozytorium
+        run: |
+          git config user.name "uew-rag-export-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add \
+            public/rag/attachment-extraction-queue.jsonl \
+            public/rag/attachment-resolution-review.jsonl \
+            public/attachment-resolution-status.json
+
+          if git diff --cached --quiet; then
+            echo "Brak zmian do zapisania."
+          else
+            git commit -m "Update UEW attachment extraction queue"
+            git push
+          fi
