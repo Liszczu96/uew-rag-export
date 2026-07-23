@@ -1,0 +1,48 @@
+{
+  "input_validation_count": 1081,
+  "base_valid_document_count": 1062,
+  "accepted_supported_type_override_count": 1,
+  "final_extraction_queue_count": 1063,
+  "review_queue_count": 13,
+  "replacement_rule_count": 7,
+  "replacement_resolved_count": 5,
+  "replacement_pending_validation_count": 2,
+  "excluded_rule_count": 5,
+  "browser_get_retry_required_count": 3,
+  "manual_review_rule_count": 3,
+  "resolution_counts": {
+    "accepted_supported_type_override": 1,
+    "validated": 1062
+  },
+  "review_decision_counts": {
+    "browser_get_retry_required": 3,
+    "excluded_from_rag": 5,
+    "manual_review": 3,
+    "replacement_target_needs_validation": 2
+  },
+  "extension_counts": {
+    ".doc": 3,
+    ".docx": 103,
+    ".odt": 1,
+    ".pdf": 947,
+    ".pptx": 6,
+    ".xlsx": 3
+  },
+  "source_counts": {
+    "badania.uew.pl": 1,
+    "bon": 26,
+    "international.uew.pl": 1,
+    "jg.uew.pl": 2,
+    "rekrutacja": 164,
+    "rekrutacja.uew.pl": 1,
+    "sd.uew.pl": 1,
+    "szkola-doktorska": 177,
+    "transfer-wiedzy": 20,
+    "uew": 506,
+    "uew.pl": 164
+  },
+  "files": {
+    "extraction_queue": "public/rag/attachment-extraction-queue.jsonl",
+    "resolution_review": "public/rag/attachment-resolution-review.jsonl"
+  }
+}
