@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "complete": false,
+  "complete": true,
   "queue_count": 1065,
   "index_count": 1065,
   "state_count": 1065,
@@ -16,7 +16,7 @@
   "missing_blob_count": 0,
   "unreadable_blob_count": 0,
   "text_hash_mismatch_count": 0,
-  "metadata_mismatch_count": 34,
+  "shared_blob_url_alias_count": 34,
   "empty_text_count": 91,
   "low_text_count": 93,
   "ocr_queue_count": 91,
@@ -59,12 +59,8 @@
     "uew": 507,
     "uew.pl": 164
   },
-  "severity_counts": {
-    "error": 34
-  },
-  "issue_type_counts": {
-    "blob_url_mismatch": 34
-  },
+  "severity_counts": {},
+  "issue_type_counts": {},
   "files": {
     "issues": "public/rag/attachment-extraction-audit-issues.jsonl",
     "ocr_queue": "public/rag/attachment-ocr-queue.jsonl"
