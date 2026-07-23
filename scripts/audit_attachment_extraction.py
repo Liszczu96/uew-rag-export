@@ -210,17 +210,14 @@ def main() -> None:
             continue
 
         verified_blob_count += 1
+
+        # Bloby są adresowane hashem treści. Ten sam plik może być
+        # podlinkowany z kilku różnych URL-i i współdzielić jeden blob.
+        # URL zapisany wewnątrz blobu wskazuje rekord, który utworzył go
+        # jako pierwszy, dlatego różnica URL nie jest błędem spójności.
         payload_url = normalized_url(payload)
         if payload_url and payload_url != url:
             metadata_mismatch_count += 1
-            issues.append(
-                make_issue(
-                    "blob_url_mismatch",
-                    "error",
-                    url,
-                    {"blob_effective_url": payload_url},
-                )
-            )
 
         text = str(payload.get("text") or "")
         calculated_text_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()
@@ -293,7 +290,6 @@ def main() -> None:
         and missing_blob_count == 0
         and unreadable_blob_count == 0
         and text_hash_mismatch_count == 0
-        and metadata_mismatch_count == 0
         and len(errors) == 0
     )
 
@@ -315,7 +311,7 @@ def main() -> None:
         "missing_blob_count": missing_blob_count,
         "unreadable_blob_count": unreadable_blob_count,
         "text_hash_mismatch_count": text_hash_mismatch_count,
-        "metadata_mismatch_count": metadata_mismatch_count,
+        "shared_blob_url_alias_count": metadata_mismatch_count,
         "empty_text_count": empty_text_count,
         "low_text_count": low_text_count,
         "ocr_queue_count": len(ocr_queue),
