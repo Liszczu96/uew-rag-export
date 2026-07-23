@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-23T10:53:51.576840+00:00",
+  "input_rule_count": 91,
+  "unique_content_hash_count": 90,
+  "decision_counts_by_unique_content": {
+    "exclude": 64,
+    "manual_review": 7,
+    "ocr": 19
+  },
+  "result_counts": {
+    "excluded_from_rag": 64,
+    "manual_review": 7,
+    "ok_ocr": 19
+  },
+  "error_count": 0,
+  "processed_ocr_page_count": 34,
+  "downloaded_bytes": 14894893,
+  "downloaded_megabytes": 14.2,
+  "final_index_status_counts": {
+    "excluded_from_rag": 64,
+    "manual_review": 7,
+    "ok": 974,
+    "ok_ocr": 20
+  },
+  "files": {
+    "results": "public/rag/attachment-ocr-results.jsonl",
+    "errors": "public/rag/attachment-ocr-errors.jsonl",
+    "changes": "public/changes/attachment-ocr-changes.jsonl",
+    "index": "public/rag/attachment-text-index.jsonl",
+    "state": "public/rag/attachment-extraction-state.jsonl"
+  }
+}
