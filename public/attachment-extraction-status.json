@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T09:08:42.140266+00:00",
+  "generated_at": "2026-07-23T09:19:09.567496+00:00",
   "queue_count": 1065,
   "selected_count": 100,
   "full_run": false,
-  "previous_index_count": 21,
-  "current_index_count": 121,
+  "previous_index_count": 121,
+  "current_index_count": 221,
   "processed_successfully_count": 100,
   "error_count": 0,
   "deleted_count": 0,
@@ -13,17 +13,22 @@
     "new": 100
   },
   "extraction_status_counts": {
-    "needs_ocr": 5,
-    "ok": 95
+    "needs_ocr": 16,
+    "ok": 84
   },
   "selected_extension_counts": {
-    ".pdf": 100
+    ".docx": 30,
+    ".pdf": 70
   },
   "selected_source_counts": {
-    "uew.pl": 100
+    "bon": 8,
+    "rekrutacja": 5,
+    "szkola-doktorska": 1,
+    "uew": 34,
+    "uew.pl": 52
   },
-  "downloaded_bytes": 52774335,
-  "downloaded_megabytes": 50.33,
+  "downloaded_bytes": 47026987,
+  "downloaded_megabytes": 44.85,
   "files": {
     "index": "public/rag/attachment-text-index.jsonl",
     "state": "public/rag/attachment-extraction-state.jsonl",
