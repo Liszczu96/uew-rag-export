@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-23T07:26:11.537304+00:00",
+  "queue_count": 21,
+  "selected_count": 21,
+  "full_run": false,
+  "previous_index_count": 0,
+  "current_index_count": 21,
+  "processed_successfully_count": 21,
+  "error_count": 0,
+  "deleted_count": 0,
+  "result_counts": {
+    "new": 21
+  },
+  "extraction_status_counts": {
+    "needs_ocr": 2,
+    "ok": 19
+  },
+  "selected_extension_counts": {
+    ".doc": 1,
+    ".docx": 5,
+    ".odt": 1,
+    ".pdf": 10,
+    ".pptx": 2,
+    ".xlsx": 2
+  },
+  "selected_source_counts": {
+    "badania.uew.pl": 1,
+    "bon": 1,
+    "international.uew.pl": 1,
+    "jg.uew.pl": 2,
+    "rekrutacja.uew.pl": 1,
+    "sd.uew.pl": 1,
+    "transfer-wiedzy": 1,
+    "uew": 4,
+    "uew.pl": 9
+  },
+  "downloaded_bytes": 25442492,
+  "downloaded_megabytes": 24.26,
+  "files": {
+    "index": "public/rag/attachment-text-index.jsonl",
+    "state": "public/rag/attachment-extraction-state.jsonl",
+    "errors": "public/rag/attachment-extraction-errors.jsonl",
+    "changes": "public/changes/attachment-text-changes.jsonl",
+    "blob_directory": "public/rag/attachment-text-blobs"
+  }
+}
