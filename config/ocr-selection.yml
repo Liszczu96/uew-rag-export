@@ -1,0 +1,922 @@
+version: 1
+selection_basis: Wartość proceduralna, normatywna i operacyjna dla asystenta RAG UEW; ocena na podstawie metadanych i nazw
+  plików.
+summary:
+  input_count: 91
+  ocr_count: 19
+  manual_review_count: 7
+  exclude_count: 65
+  ocr_page_count: 34
+  manual_review_page_count: 13
+  excluded_page_count: 67
+rules:
+- attachment_id: bon:media:5962
+  queue_id: attachment-00002
+  content_sha256: 4ac8b1241ad188f4c15a1bac81af4ec5b82542a0f8fc014b1b666b289ea84df2
+  source_id: bon
+  filename: Plany-inwestycyjne-w-zakresie-zapewniania-dostepnosci-osobom-ze-szczegolnymi-potrzebami-1.pdf
+  effective_url: https://bon.uew.pl/wp-content/uploads/sites/38/2023/11/Plany-inwestycyjne-w-zakresie-zapewniania-dostepnosci-osobom-ze-szczegolnymi-potrzebami-1.pdf
+  page_count: 4
+  decision: ocr
+  priority: high
+  reason: Dokument o dostępności i planowanych działaniach; wysoka użyteczność dla użytkowników ze szczególnymi potrzebami.
+- attachment_id: unregistered:https://international.uew.pl/wp-content/uploads/sites/62/2025/10/International-Teaching-Week-2026-Promo-Folder-7.pdf
+  queue_id: attachment-00028
+  content_sha256: 33f08dcbda3a888df0d0f96854a0c8db09609d21244dad077ea29faf16b947f9
+  source_id: international.uew.pl
+  filename: International-Teaching-Week-2026-Promo-Folder-7.pdf
+  effective_url: https://international.uew.pl/wp-content/uploads/sites/62/2025/10/International-Teaching-Week-2026-Promo-Folder-7.pdf
+  page_count: 1
+  decision: ocr
+  priority: high
+  reason: Aktualny materiał International Teaching Week 2026; użyteczny dla gości i pracowników zagranicznych.
+- attachment_id: unregistered:https://jg.uew.pl/wp-content/uploads/sites/17/2025/08/Harmonogram-rekrutacji-dodatkowej-studia-II-stopnia.pdf
+  queue_id: attachment-00030
+  content_sha256: de345cbae175a437cd8c616fac1e4743ba5d52b60b05ca38d9ec471cbba94c9a
+  source_id: jg.uew.pl
+  filename: Harmonogram-rekrutacji-dodatkowej-studia-II-stopnia.pdf
+  effective_url: https://jg.uew.pl/wp-content/uploads/sites/17/2025/08/Harmonogram-rekrutacji-dodatkowej-studia-II-stopnia.pdf
+  page_count: 2
+  decision: ocr
+  priority: high
+  reason: Harmonogram rekrutacji dodatkowej; informacja operacyjna dla kandydatów.
+- attachment_id: rekrutacja:media:1685
+  queue_id: attachment-00033
+  content_sha256: ae67f62772498ba7610ec99899f667989826814c05f4a127a190fe671cc17440
+  source_id: rekrutacja
+  filename: karta_eche_2021-2027.pdf
+  effective_url: https://rekrutacja.uew.pl/wp-content/uploads/sites/2/2023/02/karta_eche_2021-2027.pdf
+  page_count: 3
+  decision: ocr
+  priority: high
+  reason: Oficjalna karta ECHE 2021–2027; istotna dla mobilności i współpracy międzynarodowej.
+- attachment_id: rekrutacja:media:18619
+  queue_id: attachment-00123
+  content_sha256: 4a9b5a2c707fed5a1d4cf8285ccb83cdd052a2f3629fb35dbcce0d3dffafed9b
+  source_id: rekrutacja
+  filename: terminy-zjazdow.pdf
+  effective_url: https://rekrutacja.uew.pl/wp-content/uploads/sites/2/2025/02/terminy-zjazdow.pdf
+  page_count: 1
+  decision: ocr
+  priority: high
+  reason: Terminy zjazdów; informacja operacyjna dla kandydatów i studentów.
+- attachment_id: szkola-doktorska:media:9003
+  queue_id: attachment-00297
+  content_sha256: cb44702abab950a9bfdbc3a94b7b4284c8073cb4dccdf23fae0559e259bc3638
+  source_id: szkola-doktorska
+  filename: Pismo-Okolne-Dziekana-Nr-2-2024.pdf
+  effective_url: https://sd.uew.pl/wp-content/uploads/sites/59/2025/04/Pismo-Okolne-Dziekana-Nr-2-2024.pdf
+  page_count: 1
+  decision: ocr
+  priority: high
+  reason: Akt lub regulamin Szkoły Doktorskiej; wysoka wartość proceduralna i normatywna.
+- attachment_id: szkola-doktorska:media:8985
+  queue_id: attachment-00299
+  content_sha256: f41c3d47feae0c5d79164b0a263dca0cf81d9228d4ec63bac777ef4cc3af791a
+  source_id: szkola-doktorska
+  filename: Pismo-Okolne-Dziekana-Nr-4-2024-w-sprawie-skladu-komisji-do-przeprowadzenia-oceny-srodokresowej.pdf
+  effective_url: https://sd.uew.pl/wp-content/uploads/sites/59/2025/04/Pismo-Okolne-Dziekana-Nr-4-2024-w-sprawie-skladu-komisji-do-przeprowadzenia-oceny-srodokresowej.pdf
+  page_count: 1
+  decision: ocr
+  priority: high
+  reason: Akt lub regulamin Szkoły Doktorskiej; wysoka wartość proceduralna i normatywna.
+- attachment_id: szkola-doktorska:media:8958
+  queue_id: attachment-00300
+  content_sha256: 8dfcd0edd13329208e0c69b61ca5360c91959de24aaf63223b6178dcabd1f1e0
+  source_id: szkola-doktorska
+  filename: Pismo-Okolne-Dziekana-Nr-5-2024-w-sprawie-w-sprawie-szczegolowego-trybu-oceny-srodokresowej-dla-4.-edycji-doktorantow.pdf
+  effective_url: https://sd.uew.pl/wp-content/uploads/sites/59/2025/04/Pismo-Okolne-Dziekana-Nr-5-2024-w-sprawie-w-sprawie-szczegolowego-trybu-oceny-srodokresowej-dla-4.-edycji-doktorantow.pdf
+  page_count: 3
+  decision: ocr
+  priority: high
+  reason: Akt lub regulamin Szkoły Doktorskiej; wysoka wartość proceduralna i normatywna.
+- attachment_id: szkola-doktorska:media:9243
+  queue_id: attachment-00302
+  content_sha256: dedd03beba73dd43448e82f7a866602435ddf9ebc3de98caa57b26bdf3eac783
+  source_id: szkola-doktorska
+  filename: Regulamin-Rady-Szkoly-Doktorskiej.pdf
+  effective_url: https://sd.uew.pl/wp-content/uploads/sites/59/2025/04/Regulamin-Rady-Szkoly-Doktorskiej.pdf
+  page_count: 3
+  decision: ocr
+  priority: high
+  reason: Akt lub regulamin Szkoły Doktorskiej; wysoka wartość proceduralna i normatywna.
+- attachment_id: szkola-doktorska:media:5323
+  queue_id: attachment-00198
+  content_sha256: 494ce15bf2334609ce920947383ba1a66c886e4bb7acfdcd0c533ea6d05f44e3
+  source_id: szkola-doktorska
+  filename: Uchwal-nr-1-z-30.01.2020-1-strona.pdf
+  effective_url: https://sd.uew.pl/wp-content/uploads/sites/59/2024/01/Uchwal-nr-1-z-30.01.2020-1-strona.pdf
+  page_count: 1
+  decision: ocr
+  priority: high
+  reason: Akt lub regulamin Szkoły Doktorskiej; wysoka wartość proceduralna i normatywna.
+- attachment_id: szkola-doktorska:media:5311
+  queue_id: attachment-00199
+  content_sha256: 8755ffe6bb33510e315bf3c7af4ee0ba103d634fb4b27a2cbc3c6d8f61f8d8e4
+  source_id: szkola-doktorska
+  filename: Uchwala-nr-1-z-16.03.2022.pdf
+  effective_url: https://sd.uew.pl/wp-content/uploads/sites/59/2024/01/Uchwala-nr-1-z-16.03.2022.pdf
+  page_count: 1
+  decision: ocr
+  priority: high
+  reason: Akt lub regulamin Szkoły Doktorskiej; wysoka wartość proceduralna i normatywna.
+- attachment_id: szkola-doktorska:media:5341
+  queue_id: attachment-00200
+  content_sha256: fa20677685b468b4e0b185d4b291524215c5b3344c752b73baca7e360cab2e1d
+  source_id: szkola-doktorska
+  filename: Uchwala-nr-2-z-30.01.2020-1-strona.pdf
+  effective_url: https://sd.uew.pl/wp-content/uploads/sites/59/2024/01/Uchwala-nr-2-z-30.01.2020-1-strona.pdf
+  page_count: 1
+  decision: ocr
+  priority: high
+  reason: Akt lub regulamin Szkoły Doktorskiej; wysoka wartość proceduralna i normatywna.
+- attachment_id: szkola-doktorska:media:5329
+  queue_id: attachment-00201
+  content_sha256: bbb9c96847e6de7b0d7dd0415ec83f2da41c15ac299efdc82dc3ea5af85aa9b2
+  source_id: szkola-doktorska
+  filename: Zalacznik-do-Uchwaly-nr-1-z-30.01.2020.pdf
+  effective_url: https://sd.uew.pl/wp-content/uploads/sites/59/2024/01/Zalacznik-do-Uchwaly-nr-1-z-30.01.2020.pdf
+  page_count: 2
+  decision: ocr
+  priority: high
+  reason: Akt lub regulamin Szkoły Doktorskiej; wysoka wartość proceduralna i normatywna.
+- attachment_id: szkola-doktorska:media:5347
+  queue_id: attachment-00202
+  content_sha256: f39c73466106d558bb1c73d25175dc936363f5767eb766e736bea4455d0e7e42
+  source_id: szkola-doktorska
+  filename: Zalacznik-do-Uchwaly-nr-2-z-30.01.2020.pdf
+  effective_url: https://sd.uew.pl/wp-content/uploads/sites/59/2024/01/Zalacznik-do-Uchwaly-nr-2-z-30.01.2020.pdf
+  page_count: 1
+  decision: ocr
+  priority: high
+  reason: Akt lub regulamin Szkoły Doktorskiej; wysoka wartość proceduralna i normatywna.
+- attachment_id: uew:media:105511
+  queue_id: attachment-00452
+  content_sha256: 2237cc6cb9b79d9ecb4048c93aae59df7ed69a12ca132fb773b6fc280acd3f7f
+  source_id: uew
+  filename: 1-list_marszalka_senatu_rp.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2023/09/1-list_marszalka_senatu_rp.pdf
+  page_count: 2
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:105487
+  queue_id: attachment-00453
+  content_sha256: 4c6e0086575f5193933fc605b9933b7960364d126c6240b268d50769ca79a62a
+  source_id: uew
+  filename: 10-list_rektora_uek.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2023/09/10-list_rektora_uek.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:105505
+  queue_id: attachment-00454
+  content_sha256: 121b516a9ff0dc456a16fdd42402e90a3e06899f6ce674dc06572935232949ea
+  source_id: uew
+  filename: 2-list_prezesa_rady_ministrow.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2023/09/2-list_prezesa_rady_ministrow.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:144379
+  queue_id: attachment-00482
+  content_sha256: 75689de9a16e1ea2aef8bd4fb590b01192f715b0d87db44138cb445dcda736a4
+  source_id: uew
+  filename: 2020.05.30_informacja_komisja_ds._weryfikacji_prac_dyplomowych-1.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/2020.05.30_informacja_komisja_ds._weryfikacji_prac_dyplomowych-1.pdf
+  page_count: 2
+  decision: ocr
+  priority: high
+  reason: Informacja komisji dotycząca weryfikacji prac dyplomowych; użyteczna proceduralnie.
+- attachment_id: uew:media:143650
+  queue_id: attachment-00483
+  content_sha256: 75689de9a16e1ea2aef8bd4fb590b01192f715b0d87db44138cb445dcda736a4
+  source_id: uew
+  filename: 2020.05.30_informacja_komisja_ds._weryfikacji_prac_dyplomowych.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/2020.05.30_informacja_komisja_ds._weryfikacji_prac_dyplomowych.pdf
+  page_count: 2
+  decision: exclude
+  priority: low
+  reason: Duplikat binarny dokumentu z pozycji OCR; nie wykonywać OCR drugi raz.
+- attachment_id: uew:media:216327
+  queue_id: attachment-00830
+  content_sha256: 2f3bc21f5b4799e46281cef50302c47b3246dd8799ec7384fc4e52f047fbe9ad
+  source_id: uew
+  filename: 2800_001.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/04/2800_001.pdf
+  page_count: 1
+  decision: manual_review
+  priority: medium
+  reason: Niejednoznaczna nazwa pliku; przed OCR należy sprawdzić stronę źródłową lub podgląd dokumentu.
+- attachment_id: uew:media:105517
+  queue_id: attachment-00455
+  content_sha256: 1ae49097c36ab007b692394374fe116bc1b4ad52b89245db1862e091ca9f9e09
+  source_id: uew
+  filename: 3-list_marszalka_sejmu.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2023/09/3-list_marszalka_sejmu.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:105499
+  queue_id: attachment-00456
+  content_sha256: 7e753c632641cf098cc21231d9f094e15f8cc9aa08b554e0f2a056813363882f
+  source_id: uew
+  filename: 3-list_przewodniczacego_krasp.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2023/09/3-list_przewodniczacego_krasp.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:105493
+  queue_id: attachment-00457
+  content_sha256: 00cec7a69e14720bf4beb6805f471c68e5c0801836c52eb053bc6a2d96dd10af
+  source_id: uew
+  filename: 4-list_przewodniczacego_kruwio.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2023/09/4-list_przewodniczacego_kruwio.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:105475
+  queue_id: attachment-00458
+  content_sha256: 7f7b823391a71236971cd1f6e0a6e1196d2d27bf0d816eecd30c4d4e458a5765
+  source_id: uew
+  filename: 5-list_rektora_akademii_leona_kozminskiego.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2023/09/5-list_rektora_akademii_leona_kozminskiego.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:105457
+  queue_id: attachment-00461
+  content_sha256: ec57fa1cff114e6be4a59916e359b532c39c7e0ba3009e778695c766d5668909
+  source_id: uew
+  filename: 8-list_rektora_kans.pdf.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2023/09/8-list_rektora_kans.pdf.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:105481
+  queue_id: attachment-00462
+  content_sha256: 43feb58c647f7f6fd75207860a6bc095bd323cbce77dc073222624f8ef45bb2a
+  source_id: uew
+  filename: 9-list_rektora_politechniki_slaskiej.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2023/09/9-list_rektora_politechniki_slaskiej.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:216246
+  queue_id: attachment-00831
+  content_sha256: 24c81ee23fc40c001351794d149b1a9bef8b7b33f8887b8797f1981e0c7981bb
+  source_id: uew
+  filename: AKADEMA-MUZYCZNA-W-w.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/04/AKADEMA-MUZYCZNA-W-w.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Niska przewidywana wartość operacyjna dla RAG na podstawie nazwy i kontekstu źródła.
+- attachment_id: uew:media:253299
+  queue_id: attachment-00976
+  content_sha256: 0439ba00bc7de9b1785703c18297a0582f5583f38c1cb0ddbe859a660ad9ff3c
+  source_id: uew
+  filename: AKADEMIA-NAUK-STOSOWANYCH-ANGELUSA-SILESIUSA-list-inauguracja.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/10/AKADEMIA-NAUK-STOSOWANYCH-ANGELUSA-SILESIUSA-list-inauguracja.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:168413
+  queue_id: attachment-00695
+  content_sha256: 6fd782a1c74ca2703525c151de401b34ac00e7473d23d019e0e0402616cb3435
+  source_id: uew
+  filename: Apel_Prezydium_KRASP_ws_udzialu_w_wyborach_PE.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/05/Apel_Prezydium_KRASP_ws_udzialu_w_wyborach_PE.pdf
+  page_count: 1
+  decision: manual_review
+  priority: medium
+  reason: Publiczny apel, ale niska wartość operacyjna; decyzja zależy od zakresu asystenta.
+- attachment_id: uew:media:239517
+  queue_id: attachment-00956
+  content_sha256: 2424faf49736c02ea4c363b5a3abe9975ccbc72768928747096791537f2a55ee
+  source_id: uew
+  filename: Certyfikat-POLSA-Julia-Majewska.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/07/Certyfikat-POLSA-Julia-Majewska.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:251568
+  queue_id: attachment-00978
+  content_sha256: 17f56fb8ef5f95bb8538f5324b2d50af4146d20a08de16acb11fb937ac896394
+  source_id: uew
+  filename: List-od-Dyrektora-Izby-Administracji-Skarbowej-2025.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/10/List-od-Dyrektora-Izby-Administracji-Skarbowej-2025.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:251574
+  queue_id: attachment-00979
+  content_sha256: 6ba484ec7eec3962974fb2eed9824bc4046cf13b909f792f348d82bdee4aa8a9
+  source_id: uew
+  filename: List-od-JM-Rektora-AWL-2025.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/10/List-od-JM-Rektora-AWL-2025.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:251580
+  queue_id: attachment-00980
+  content_sha256: ded5e1f04f64ae46ee88c9953b23fd413876dc0c56bd876da1add09cb9140a76
+  source_id: uew
+  filename: List-od-JM-Rektora-PWR-2025.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/10/List-od-JM-Rektora-PWR-2025.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:252042
+  queue_id: attachment-00981
+  content_sha256: 25076fee7402faa728b792b00695e220479f895fa0aa80871a68528afc2b229a
+  source_id: uew
+  filename: List-od-JM-Rektora-UE-Katowice-2025.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/10/List-od-JM-Rektora-UE-Katowice-2025.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:251598
+  queue_id: attachment-00984
+  content_sha256: 5dfe88646f6525dbff82a1f5663a26b7f7dc59f9fd71a248290a2b3479fd3fa7
+  source_id: uew
+  filename: List-od-Marszalka-Sejmu-RP-2025.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/10/List-od-Marszalka-Sejmu-RP-2025.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:251604
+  queue_id: attachment-00985
+  content_sha256: d717f04dbaded829f57dc3ca6f3701e72481778adc8bc917d1af844825671a2e
+  source_id: uew
+  filename: List-od-Posla-Krzysztofa-Mieszkowskiego-2025.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/10/List-od-Posla-Krzysztofa-Mieszkowskiego-2025.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:251610
+  queue_id: attachment-00986
+  content_sha256: a7a4b224acdfa238b7d6e44eff2a4cd1d590c3dcaf4331999c4cfee1862b44f8
+  source_id: uew
+  filename: List-od-Prezesa-Zarzadu-OD-SKwP-we-Wroclawiu-2025.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/10/List-od-Prezesa-Zarzadu-OD-SKwP-we-Wroclawiu-2025.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:251616
+  queue_id: attachment-00987
+  content_sha256: 93026a144d363286fff9b43771110cabf00cb237629aecba2d11f680aad1dabd
+  source_id: uew
+  filename: List-od-Przewodniczacej-KRASP-2025.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/10/List-od-Przewodniczacej-KRASP-2025.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:185890
+  queue_id: attachment-00717
+  content_sha256: ce39045dd711d6b931ec4cf9d9027928260aeb781e9b848d5d4f964793e62e46
+  source_id: uew
+  filename: List_Anna-Sobolak-Poslanka-na-Sejm-Rzeczpospolitej-Polskiej.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/10/List_Anna-Sobolak-Poslanka-na-Sejm-Rzeczpospolitej-Polskiej.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:185908
+  queue_id: attachment-00718
+  content_sha256: 52ae9900a1faf01b6ea92a56e8ae0f7af5c9927563cb15164c160ef650d0b70d
+  source_id: uew
+  filename: List_Izba-Administracji-Skarbowej-we-Wroclawiu.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/10/List_Izba-Administracji-Skarbowej-we-Wroclawiu.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:185875
+  queue_id: attachment-00719
+  content_sha256: 7c0dd248cd7cab6bbbfafffaa63ee84523e5b72e89135d8eeae2a28284ee2bb2
+  source_id: uew
+  filename: List_Marszalek-Wojewodztwa-Dolnoslaskiego.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/10/List_Marszalek-Wojewodztwa-Dolnoslaskiego.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:185884
+  queue_id: attachment-00720
+  content_sha256: 51dff8790c953ea6e05586f29ee6e84e67f109ac256353944b21dfe0cad0c15b
+  source_id: uew
+  filename: List_Minister-nauki-Dariusz-Wieczorek.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/10/List_Minister-nauki-Dariusz-Wieczorek.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:185896
+  queue_id: attachment-00721
+  content_sha256: 141c257905d0ae2292d1cabaf6f0062e1cdd6f0779bb7aa6a67dfb1b0d8f9ba5
+  source_id: uew
+  filename: List_Uniwersytet-Ekonomiczny-w-Krakowie.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/10/List_Uniwersytet-Ekonomiczny-w-Krakowie.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:134170
+  queue_id: attachment-00472
+  content_sha256: 37ad11b48ce8a0e1ca0e7e78cd00bad725c40017726e46d8c2bade371157b77f
+  source_id: uew
+  filename: M.Gorynia-List-Wiceprezesa-PAN.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2023/11/M.Gorynia-List-Wiceprezesa-PAN.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:134158
+  queue_id: attachment-00473
+  content_sha256: de83933960edfa7612e080536a794960ff614250f24f5212d6091b3cd7b8629c
+  source_id: uew
+  filename: M.Gorynia-List-od-Prezydenta-Miasta-Poznania.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2023/11/M.Gorynia-List-od-Prezydenta-Miasta-Poznania.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:134152
+  queue_id: attachment-00474
+  content_sha256: dce662d611f52032a99f0da416d01cfd4da418a11fec3145e5acc2a3e9394d81
+  source_id: uew
+  filename: M.Gorynia-List-od-emerytowanego-prof.-Witolda-Jurka-UEP-2.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2023/11/M.Gorynia-List-od-emerytowanego-prof.-Witolda-Jurka-UEP-2.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:134176
+  queue_id: attachment-00475
+  content_sha256: 514cc873c1b4047b7c9647441d86db9814a73f7edc86eee9785701b49c32eefe
+  source_id: uew
+  filename: M.Gorynia-List-z-PAN-odzial-w-Poznaniu.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2023/11/M.Gorynia-List-z-PAN-odzial-w-Poznaniu.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:155029
+  queue_id: attachment-00667
+  content_sha256: 76266e25fdfeaac175719e8a5a036b83dc0339dc02303917f4a45eae76343263
+  source_id: uew
+  filename: PROGRAM-KONFERENCJI-Kreatywnosc-zaczyna-sie-w-mozgu.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/03/PROGRAM-KONFERENCJI-Kreatywnosc-zaczyna-sie-w-mozgu.pdf
+  page_count: 1
+  decision: manual_review
+  priority: medium
+  reason: Materiał wydarzeniowy; prawdopodobnie krótkotrwały i częściowo dublowany przez stronę wydarzenia.
+- attachment_id: uew:media:216258
+  queue_id: attachment-00832
+  content_sha256: 11e11e04f6476f08d5a72de4288f903a757a473a843988f494bb25020d5a7146
+  source_id: uew
+  filename: UNIWERSYTET-EKONOMICZNY-W-POZNANIU.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/04/UNIWERSYTET-EKONOMICZNY-W-POZNANIU.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Niska przewidywana wartość operacyjna dla RAG na podstawie nazwy i kontekstu źródła.
+- attachment_id: uew:media:216252
+  queue_id: attachment-00833
+  content_sha256: d19da6b12358da47b7f46dc92472843faab43de49cb0f8abfaaf0c70e2762d6d
+  source_id: uew
+  filename: UNIWERSYTET-EKONOMICZNY-w-KATOWICACH.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/04/UNIWERSYTET-EKONOMICZNY-w-KATOWICACH.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Niska przewidywana wartość operacyjna dla RAG na podstawie nazwy i kontekstu źródła.
+- attachment_id: uew:media:216264
+  queue_id: attachment-00834
+  content_sha256: 9880162c11cc2816917c710a2dea0a415708fe8a8d86b19fffcd7290c1f93037
+  source_id: uew
+  filename: UNIWERSYTET-St.-Petersburg.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/04/UNIWERSYTET-St.-Petersburg.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Niska przewidywana wartość operacyjna dla RAG na podstawie nazwy i kontekstu źródła.
+- attachment_id: uew:media:155023
+  queue_id: attachment-00675
+  content_sha256: 1d9bbae174976eb92b6c5c444ce6b7673d6a31c78ccfc26ef060fda938c26178
+  source_id: uew
+  filename: WARSZTATY-Kreatywnosc-zaczyna-sie-w-mozgu-.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/03/WARSZTATY-Kreatywnosc-zaczyna-sie-w-mozgu-.pdf
+  page_count: 4
+  decision: manual_review
+  priority: medium
+  reason: Materiał wydarzeniowy; prawdopodobnie krótkotrwały i częściowo dublowany przez stronę wydarzenia.
+- attachment_id: uew:media:216270
+  queue_id: attachment-00835
+  content_sha256: 08b24cf1be9d5984f8c0f41ffe9962d42df12d2bcc470dd45baca7b02b063eb3
+  source_id: uew
+  filename: Wyrazy-wspolczucia.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/04/Wyrazy-wspolczucia.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:183817
+  queue_id: attachment-00715
+  content_sha256: bb945604b7deb0f2d43eddf5c045ceee8be9b13719f79f6dc25a23a334b48f12
+  source_id: uew
+  filename: Zyczenia-od-min.-B.Zdrojewskiego_Uniw.-Ekonomiczny-we-Wroclawiu.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/09/Zyczenia-od-min.-B.Zdrojewskiego_Uniw.-Ekonomiczny-we-Wroclawiu.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:141250
+  queue_id: attachment-00493
+  content_sha256: 37b186081b9ffecf8d5f4edb48941e007a82bfa1b05e270b0d0aafa55e3173ce
+  source_id: uew
+  filename: dhc_wczakon_01_marszalek_sejmu_rp.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/dhc_wczakon_01_marszalek_sejmu_rp.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:141244
+  queue_id: attachment-00494
+  content_sha256: dcf3e37b7a8597e427074d01707b9fe24487657756d3711c46e02bea5c01d794
+  source_id: uew
+  filename: dhc_wczakon_02_politechnika_wroc.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/dhc_wczakon_02_politechnika_wroc.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:141238
+  queue_id: attachment-00495
+  content_sha256: 39bfd463e1378bfab712fe5f887457d292b468020f95f3079e28603959a3da53
+  source_id: uew
+  filename: dhc_wczakon_03_sgh.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/dhc_wczakon_03_sgh.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:141232
+  queue_id: attachment-00496
+  content_sha256: 5fda50fbf86bff463d09fb274b1636d1aa939cb199ee0d42b654cbfeae0a27e8
+  source_id: uew
+  filename: dhc_wczakon_04_ue_katowice.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/dhc_wczakon_04_ue_katowice.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:141226
+  queue_id: attachment-00497
+  content_sha256: 72d0f9bd1c6fa6482efbd002e797b0ae21e3007d4ea33a9bc09e35f9d5814049
+  source_id: uew
+  filename: dhc_wczakon_05_ue_krakow.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/dhc_wczakon_05_ue_krakow.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:141217
+  queue_id: attachment-00498
+  content_sha256: ca7934370dde30f982fe399c2777795b30ffd7d61528226900d135a57e36d9fd
+  source_id: uew
+  filename: dhc_wczakon_06_swps.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/dhc_wczakon_06_swps.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:141211
+  queue_id: attachment-00499
+  content_sha256: 9312cfdbfdc52ce365d6e35dd1ce5d3faf4d2486ab8978d5aff83a9ef9866882
+  source_id: uew
+  filename: dhc_wczakon_07_wsb.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/dhc_wczakon_07_wsb.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:141205
+  queue_id: attachment-00500
+  content_sha256: 3698eabcaf64bb8c2ca2a964675c29c2d423466ec1c7a4f07baa18aa9b416d48
+  source_id: uew
+  filename: dhc_wczakon_08_pip.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/dhc_wczakon_08_pip.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:141199
+  queue_id: attachment-00501
+  content_sha256: 5c3990ad5019476fab041b32891e4414e3aa2381bca851803bb8fc3d4b495631
+  source_id: uew
+  filename: dhc_wczakon_09_ias_wroclaw.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/dhc_wczakon_09_ias_wroclaw.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:141193
+  queue_id: attachment-00502
+  content_sha256: 773e921df67224e618e75d4a65d5b53af97c4848b9615895341003540c52ea79
+  source_id: uew
+  filename: dhc_wczakon_10_us_wroclaw.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/dhc_wczakon_10_us_wroclaw.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:141187
+  queue_id: attachment-00503
+  content_sha256: e95ff5d7a827cb10e6c2d29809620db9683fdcc120a4ae92007b72a6ecab31e0
+  source_id: uew
+  filename: dhc_wczakon_11_frw.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/dhc_wczakon_11_frw.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:172346
+  queue_id: attachment-00691
+  content_sha256: fa4244e650d8ab0da76acbb3fb873a9f453b382a41f6c8537060f641143e36aa
+  source_id: uew
+  filename: krzysztof-jajuga-knf-pan-uew.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/04/krzysztof-jajuga-knf-pan-uew.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Niska przewidywana wartość operacyjna dla RAG na podstawie nazwy i kontekstu źródła.
+- attachment_id: uew:media:277854
+  queue_id: attachment-01060
+  content_sha256: 47a5a28024ff0021086569891a0307aa17bf7190a766000081a37fef595059d3
+  source_id: uew
+  filename: list-gratulacyjny-KRS.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2026/06/list-gratulacyjny-KRS.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:245220
+  queue_id: attachment-00966
+  content_sha256: 3558671c9e7a07692072739bdd186d49edcaf028e4a894d43296dd6dfd64e130
+  source_id: uew
+  filename: nabieraMYodwagi-List-intencyjny-Uniwersytetu-Medycznego-we-Wroclawiu-i-Uniwersytetu-Ekonomicznego-we-Wroclawiu.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/08/nabieraMYodwagi-List-intencyjny-Uniwersytetu-Medycznego-we-Wroclawiu-i-Uniwersytetu-Ekonomicznego-we-Wroclawiu.pdf
+  page_count: 4
+  decision: manual_review
+  priority: medium
+  reason: List intencyjny o potencjalnej wartości strategicznej; wymaga decyzji, czy RAG ma obejmować komunikację instytucjonalną.
+- attachment_id: uew:media:144151
+  queue_id: attachment-00530
+  content_sha256: 015c7bfbacfab2a44ead26ee731f7483b4f2002c8ab65e623161243ba2c7dabe
+  source_id: uew
+  filename: regulation_no_120a_2020.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/regulation_no_120a_2020.pdf
+  page_count: 2
+  decision: ocr
+  priority: high
+  reason: Oficjalne zarządzenie/regulacja; wartość normatywna dla RAG.
+- attachment_id: uew:media:144145
+  queue_id: attachment-00531
+  content_sha256: d3326e13f07485be66cd2e62bf8cad708828d2b661e345daf8fb38972b832e94
+  source_id: uew
+  filename: regulation_no_152_2020.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/01/regulation_no_152_2020.pdf
+  page_count: 3
+  decision: ocr
+  priority: high
+  reason: Oficjalne zarządzenie/regulacja; wartość normatywna dla RAG.
+- attachment_id: uew:media:221094
+  queue_id: attachment-00910
+  content_sha256: 512c544a6b640264bd15b17e746b44b3bae0fea2a30d2cf03fc9a291106a2115
+  source_id: uew
+  filename: ruuew-uchwala_nr_7_1.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/05/ruuew-uchwala_nr_7_1.pdf
+  page_count: 1
+  decision: ocr
+  priority: high
+  reason: Oficjalna uchwała; wartość normatywna dla RAG.
+- attachment_id: uew:media:157390
+  queue_id: attachment-00677
+  content_sha256: 0a1e8f8859558b76e463b17fc35fa01c15511eccf33662490fb8d4da434e0beb
+  source_id: uew
+  filename: swieto-uczelni-2024-list-awl.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/03/swieto-uczelni-2024-list-awl.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:156853
+  queue_id: attachment-00678
+  content_sha256: d8be1372234ffe6f71a80052e02cd86de3936131dcc7d6a9184ab5f10f16dffa
+  source_id: uew
+  filename: swieto-uczelni-2024-list-krasp.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/03/swieto-uczelni-2024-list-krasp.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:156847
+  queue_id: attachment-00679
+  content_sha256: 80615093ea34b14a04e9cfaaada3e72e567e9ce51af2a255b1f2d3cc126285e1
+  source_id: uew
+  filename: swieto-uczelni-2024-list-mn.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/03/swieto-uczelni-2024-list-mn.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:157375
+  queue_id: attachment-00680
+  content_sha256: 8cb9b4e346b081fda3ae05d3931b40260d89cb094e98ed566405602b467efb67
+  source_id: uew
+  filename: swieto-uczelni-2024-list-uek.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/03/swieto-uczelni-2024-list-uek.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:157384
+  queue_id: attachment-00681
+  content_sha256: 906dc331a4a4c85ab99d2035d7d5083660d89d493503cca4c1855456a298689c
+  source_id: uew
+  filename: swieto-uczelni-2024-list-uekat.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/03/swieto-uczelni-2024-list-uekat.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: uew:media:221088
+  queue_id: attachment-00913
+  content_sha256: 073bea8f82afe0be2693dba362fc590d98720696d3bfe38d7cfba522a6f7877e
+  source_id: uew
+  filename: uchwala_nr_63_2020.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/05/uchwala_nr_63_2020.pdf
+  page_count: 1
+  decision: ocr
+  priority: high
+  reason: Oficjalna uchwała; wartość normatywna dla RAG.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2024/09/List-1.pdf
+  queue_id: attachment-00702
+  content_sha256: 0d6dc9b531d391573b3bef30fc9d73f8bb448f5b5625e6f6513de3fdfa64c6bd
+  source_id: uew.pl
+  filename: List-1.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/09/List-1.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2024/09/List-Marszalka-Sejmu-RP-Pana-Szymona-Holowni.pdf
+  queue_id: attachment-00703
+  content_sha256: 667f679076e56c15320fa5643b33f2b0aca8e42079d45d30b5093eff3a21026e
+  source_id: uew.pl
+  filename: List-Marszalka-Sejmu-RP-Pana-Szymona-Holowni.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/09/List-Marszalka-Sejmu-RP-Pana-Szymona-Holowni.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2024/09/PIR_2024.pdf
+  queue_id: attachment-00704
+  content_sha256: d4cb8a3415856d6dbbf8fa125681ffdb6abe30bf91ac763e0410793af7650240
+  source_id: uew.pl
+  filename: PIR_2024.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/09/PIR_2024.pdf
+  page_count: 1
+  decision: manual_review
+  priority: medium
+  reason: Niejednoznaczna nazwa pliku; przed OCR należy sprawdzić stronę źródłową lub podgląd dokumentu.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2025/03/Swieto-Uczelni-2025-List-Dyrektora-Izby-Administracji-Skarbowej-we-Wroclawiu.pdf
+  queue_id: attachment-00824
+  content_sha256: 2a970be29d217cac48ef2332c62fdd071b5b2b47ddd7cf64ca8f8ebbd52e918e
+  source_id: uew.pl
+  filename: Swieto-Uczelni-2025-List-Dyrektora-Izby-Administracji-Skarbowej-we-Wroclawiu.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/03/Swieto-Uczelni-2025-List-Dyrektora-Izby-Administracji-Skarbowej-we-Wroclawiu.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2025/03/Swieto-Uczelni-2025-List-Rektora-UE-w-Katowicach.pdf
+  queue_id: attachment-00825
+  content_sha256: 06de1a7afbc6e6a7c434274c0a9bf57606528a8d21244f704b7297c813514226
+  source_id: uew.pl
+  filename: Swieto-Uczelni-2025-List-Rektora-UE-w-Katowicach.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/03/Swieto-Uczelni-2025-List-Rektora-UE-w-Katowicach.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2025/03/Swieto-Uczelni-2025-List-Rektora-UEK.pdf
+  queue_id: attachment-00826
+  content_sha256: 86f917d3a106ed5502a5d3f25bd6d4b41b2e50e6bd98f689bca7b46a6dc62ceb
+  source_id: uew.pl
+  filename: Swieto-Uczelni-2025-List-Rektora-UEK.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/03/Swieto-Uczelni-2025-List-Rektora-UEK.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2025/03/Swieto-Uczelni-2025-–-List-Rektora-AWL.pdf
+  queue_id: attachment-00823
+  content_sha256: cf8c3732ceef0fb2b5766bb5aee75b4a3012d259e682758c9de0eb2dfb4d2d59
+  source_id: uew.pl
+  filename: Swieto-Uczelni-2025-–-List-Rektora-AWL.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2025/03/Swieto-Uczelni-2025-%E2%80%93-List-Rektora-AWL.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2026/06/Swieto-Uczelni-2026-–-List-Marszalka-Sejmu-RP.pdf
+  queue_id: attachment-01052
+  content_sha256: 67f5cc03c9920ea878660f6e9fc6e659470094433c85354b941784541f8a1704
+  source_id: uew.pl
+  filename: Swieto-Uczelni-2026-–-List-Marszalka-Sejmu-RP.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2026/06/Swieto-Uczelni-2026-%E2%80%93-List-Marszalka-Sejmu-RP.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2026/06/Swieto-Uczelni-2026-–-List-Rektora-UE-w-Katowicach.pdf
+  queue_id: attachment-01053
+  content_sha256: d4d1657c44410d7d279b81998d94310071136280ff640f1f805431b01d33640a
+  source_id: uew.pl
+  filename: Swieto-Uczelni-2026-–-List-Rektora-UE-w-Katowicach.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2026/06/Swieto-Uczelni-2026-%E2%80%93-List-Rektora-UE-w-Katowicach.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2026/06/Swieto-Uczelni-2026-–-List-Rektora-UE-w-Krakowie-do-prof.-Erica-Maskina.pdf
+  queue_id: attachment-01054
+  content_sha256: ea2360616a99f2b37739dd3edc51a92750c3d08937294679dd3872f3ff282631
+  source_id: uew.pl
+  filename: Swieto-Uczelni-2026-–-List-Rektora-UE-w-Krakowie-do-prof.-Erica-Maskina.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2026/06/Swieto-Uczelni-2026-%E2%80%93-List-Rektora-UE-w-Krakowie-do-prof.-Erica-Maskina.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2026/06/Swieto-Uczelni-2026-–-List-Rektora-UE-w-Krakowie.pdf
+  queue_id: attachment-01055
+  content_sha256: b31768a11350dc48ccb02dfa0ae39ae2c2b031c053f546eeb61c0e6446a03e2b
+  source_id: uew.pl
+  filename: Swieto-Uczelni-2026-–-List-Rektora-UE-w-Krakowie.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2026/06/Swieto-Uczelni-2026-%E2%80%93-List-Rektora-UE-w-Krakowie.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2026/06/Swieto-Uczelni-2026-–-List-Rektora-UE-w-Poznaniu.pdf
+  queue_id: attachment-01056
+  content_sha256: e082aef5ed7c951fcdd8d6b65ad75f3b08d359104b19d85226d82babcedbd3b7
+  source_id: uew.pl
+  filename: Swieto-Uczelni-2026-–-List-Rektora-UE-w-Poznaniu.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2026/06/Swieto-Uczelni-2026-%E2%80%93-List-Rektora-UE-w-Poznaniu.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2024/09/Uniwersytet_Ekonomiczny_Wroclaw.pdf
+  queue_id: attachment-00706
+  content_sha256: 1af51c09a7faadd3d095dd5de9c2ee6b24fb4c9c258af007cd84cb4e884c1e50
+  source_id: uew.pl
+  filename: Uniwersytet_Ekonomiczny_Wroclaw.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/09/Uniwersytet_Ekonomiczny_Wroclaw.pdf
+  page_count: 1
+  decision: manual_review
+  priority: medium
+  reason: Niejednoznaczna nazwa pliku; przed OCR należy sprawdzić stronę źródłową lub podgląd dokumentu.
+- attachment_id: unregistered:https://uew.pl/wp-content/uploads/2024/10/list-rektora-pwr-inauguracja-2024-uew.pdf
+  queue_id: attachment-00726
+  content_sha256: 68106a58e7ea7c21f5289db7d7a1109e210cdab66bff6b92f3af63b8f65436f5
+  source_id: uew.pl
+  filename: list-rektora-pwr-inauguracja-2024-uew.pdf
+  effective_url: https://uew.pl/wp-content/uploads/2024/10/list-rektora-pwr-inauguracja-2024-uew.pdf
+  page_count: 1
+  decision: exclude
+  priority: low
+  reason: Treść ceremonialna, gratulacyjna lub okolicznościowa; niska wartość dla odpowiedzi RAG.
