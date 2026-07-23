@@ -1,0 +1,34 @@
+{
+  "base_queue_count": 1063,
+  "input_review_count": 13,
+  "second_pass_attempted_count": 5,
+  "second_pass_resolved_count": 2,
+  "excluded_terminal_count": 5,
+  "manual_review_retained_count": 3,
+  "final_extraction_queue_count": 1065,
+  "final_review_count": 6,
+  "queue_growth_count": 2,
+  "final_extension_counts": {
+    ".doc": 3,
+    ".docx": 103,
+    ".odt": 1,
+    ".pdf": 949,
+    ".pptx": 6,
+    ".xlsx": 3
+  },
+  "remaining_review_decision_counts": {
+    "manual_review": 3,
+    "second_pass_validation_failed": 3
+  },
+  "audit_status_counts": {
+    "manual_review_retained": 3,
+    "resolved_added_to_queue": 2,
+    "resolved_excluded": 5,
+    "unresolved_after_second_pass": 3
+  },
+  "files": {
+    "final_extraction_queue": "public/rag/attachment-extraction-queue-final.jsonl",
+    "final_review": "public/rag/attachment-resolution-final-review.jsonl",
+    "second_pass_audit": "public/rag/attachment-resolution-second-pass.jsonl"
+  }
+}
