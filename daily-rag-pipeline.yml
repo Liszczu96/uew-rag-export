@@ -1,0 +1,200 @@
+name: Daily UEW RAG pipeline
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Codziennie o 02:23 UTC:
+    # 04:23 w Polsce w czasie letnim, 03:23 w czasie zimowym.
+    - cron: "23 2 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uew-rag-daily-pipeline
+  cancel-in-progress: false
+
+jobs:
+  update-rag-corpus:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v6
+
+      - name: Ustaw Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Zainstaluj zależności
+        run: |
+          pip install -r requirements.txt
+
+          sudo apt-get update
+          sudo apt-get install -y antiword
+
+      - name: Sprawdź składnię skryptów
+        run: |
+          python -m py_compile \
+            scripts/export_sources.py \
+            scripts/build_attachment_manifest.py \
+            scripts/validate_attachment_urls.py \
+            scripts/build_attachment_extraction_queue.py \
+            scripts/resolve_attachment_review.py \
+            scripts/extract_attachment_text.py \
+            scripts/audit_attachment_extraction.py \
+            scripts/build_rag_corpus.py
+
+      - name: Pobierz aktualne treści WordPress
+        run: python scripts/export_sources.py
+
+      - name: Zbuduj manifest załączników
+        run: python scripts/build_attachment_manifest.py
+
+      - name: Zweryfikuj adresy załączników
+        run: python scripts/validate_attachment_urls.py
+
+      - name: Zbuduj kolejkę ekstrakcji
+        run: python scripts/build_attachment_extraction_queue.py
+
+      - name: Rozstrzygnij wyjątki załączników
+        run: python scripts/resolve_attachment_review.py
+
+      - name: Wyodrębnij tekst z nowych lub zmienionych plików
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          max_batches=20
+          batch_size=100
+
+          for batch_number in $(seq 1 "$max_batches"); do
+            echo "===== PARTIA $batch_number / $max_batches ====="
+
+            python scripts/extract_attachment_text.py \
+              --only-pending \
+              --limit "$batch_size" \
+              --max-file-size-mb 50 \
+              --timeout-seconds 120
+
+            selected_count="$(
+              python - <<'PY'
+          import json
+          from pathlib import Path
+
+          status_path = Path("public/attachment-extraction-status.json")
+          status = json.loads(status_path.read_text(encoding="utf-8"))
+          print(int(status.get("selected_count", 0)))
+          PY
+            )"
+
+            echo "Wybrano w partii: $selected_count"
+
+            if [ "$selected_count" -eq 0 ]; then
+              echo "Brak dalszych plików oczekujących na ekstrakcję."
+              break
+            fi
+
+            if [ "$batch_number" -eq "$max_batches" ]; then
+              echo "Osiągnięto limit partii. Wymagana kontrola kolejki."
+              exit 1
+            fi
+          done
+
+      - name: Wykonaj audyt ekstrakcji
+        run: python scripts/audit_attachment_extraction.py
+
+      - name: Zbuduj końcowy korpus RAG
+        run: |
+          python scripts/build_rag_corpus.py \
+            --max-words 350 \
+            --overlap-words 50
+
+      - name: Sprawdź końcową integralność
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          extraction = json.loads(
+              Path("public/attachment-extraction-audit.json")
+              .read_text(encoding="utf-8")
+          )
+          corpus = json.loads(
+              Path("public/rag-corpus-status.json")
+              .read_text(encoding="utf-8")
+          )
+
+          if not extraction.get("complete"):
+              raise SystemExit("Audyt ekstrakcji nie potwierdził kompletności.")
+
+          integrity = corpus.get("integrity", {})
+
+          if integrity.get("duplicate_document_id_count", 0) != 0:
+              raise SystemExit("Wykryto zduplikowane identyfikatory dokumentów.")
+
+          if integrity.get("duplicate_chunk_id_count", 0) != 0:
+              raise SystemExit("Wykryto zduplikowane identyfikatory chunków.")
+
+          if integrity.get("documents_without_chunks", 0) != 0:
+              raise SystemExit("Niektóre dokumenty nie mają chunków.")
+
+          if corpus.get("corpus_counts", {}).get("chunks", 0) <= 0:
+              raise SystemExit("Końcowy korpus nie zawiera chunków.")
+
+          print("Końcowa integralność: OK")
+          print(
+              "Dokumenty:",
+              corpus.get("corpus_counts", {}).get("documents", 0),
+          )
+          print(
+              "Chunki:",
+              corpus.get("corpus_counts", {}).get("chunks", 0),
+          )
+          print(
+              "Dokumenty oczekujące na OCR:",
+              extraction.get("ocr_queue_count", 0),
+          )
+          PY
+
+      - name: Pokaż podsumowanie
+        if: always()
+        run: |
+          echo "===== EKSPORT ŹRÓDEŁ ====="
+          test -f public/status.json && cat public/status.json || true
+
+          echo ""
+          echo "===== KOŃCOWA KOLEJKA ZAŁĄCZNIKÓW ====="
+          test -f public/attachment-final-status.json \
+            && cat public/attachment-final-status.json \
+            || true
+
+          echo ""
+          echo "===== AUDYT EKSTRAKCJI ====="
+          test -f public/attachment-extraction-audit.json \
+            && cat public/attachment-extraction-audit.json \
+            || true
+
+          echo ""
+          echo "===== KORPUS RAG ====="
+          test -f public/rag-corpus-status.json \
+            && cat public/rag-corpus-status.json \
+            || true
+
+      - name: Zapisz zaktualizowaną bazę wiedzy
+        run: |
+          git config user.name "uew-rag-export-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add public
+
+          if git diff --cached --quiet; then
+            echo "Brak zmian do zapisania."
+          else
+            git commit -m "Daily UEW RAG pipeline update"
+            git pull --rebase
+            git push
+          fi
