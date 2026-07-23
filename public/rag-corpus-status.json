@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T11:16:11.361984+00:00",
+  "generated_at": "2026-07-23T14:06:27.806187+00:00",
   "chunking": {
     "max_words": 350,
     "overlap_words": 50,
