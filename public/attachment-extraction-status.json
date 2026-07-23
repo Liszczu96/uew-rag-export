@@ -1,34 +1,35 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T09:39:00.349447+00:00",
+  "generated_at": "2026-07-23T10:02:06.856187+00:00",
   "queue_count": 1065,
-  "selected_count": 200,
+  "selected_count": 400,
   "full_run": false,
-  "previous_index_count": 321,
-  "current_index_count": 521,
-  "processed_successfully_count": 200,
+  "previous_index_count": 521,
+  "current_index_count": 921,
+  "processed_successfully_count": 400,
   "error_count": 0,
   "deleted_count": 0,
   "result_counts": {
-    "new": 200
+    "new": 400
   },
   "extraction_status_counts": {
-    "needs_ocr": 19,
-    "ok": 181
+    "needs_ocr": 18,
+    "ok": 382
   },
   "selected_extension_counts": {
-    ".docx": 3,
-    ".pdf": 197
+    ".docx": 24,
+    ".pdf": 376
   },
   "selected_source_counts": {
-    "bon": 2,
-    "rekrutacja": 33,
-    "szkola-doktorska": 32,
-    "transfer-wiedzy": 3,
-    "uew": 130
+    "bon": 10,
+    "rekrutacja": 97,
+    "szkola-doktorska": 88,
+    "transfer-wiedzy": 9,
+    "uew": 193,
+    "uew.pl": 3
   },
-  "downloaded_bytes": 32488215,
-  "downloaded_megabytes": 30.98,
+  "downloaded_bytes": 147779264,
+  "downloaded_megabytes": 140.93,
   "files": {
     "index": "public/rag/attachment-text-index.jsonl",
     "state": "public/rag/attachment-extraction-state.jsonl",
