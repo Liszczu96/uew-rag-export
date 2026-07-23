@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "complete": false,
+  "queue_count": 1065,
+  "index_count": 1065,
+  "state_count": 1065,
+  "error_record_count": 0,
+  "verified_blob_count": 1065,
+  "missing_in_index_count": 0,
+  "missing_in_state_count": 0,
+  "orphan_index_count": 0,
+  "orphan_state_count": 0,
+  "queue_duplicate_url_count": 0,
+  "index_duplicate_url_count": 0,
+  "state_duplicate_url_count": 0,
+  "missing_blob_count": 0,
+  "unreadable_blob_count": 0,
+  "text_hash_mismatch_count": 0,
+  "metadata_mismatch_count": 34,
+  "empty_text_count": 91,
+  "low_text_count": 93,
+  "ocr_queue_count": 91,
+  "total_word_count": 1344643,
+  "total_char_count": 9544331,
+  "duplicate_content_hash_group_count": 34,
+  "duplicate_content_extra_copy_count": 34,
+  "duplicate_text_hash_group_count": 36,
+  "duplicate_text_extra_copy_count": 127,
+  "extraction_status_counts": {
+    "needs_ocr": 91,
+    "ok": 974
+  },
+  "parser_counts": {
+    "antiword": 3,
+    "odfpy": 1,
+    "openpyxl": 3,
+    "pypdf": 949,
+    "python-docx": 103,
+    "python-pptx": 6
+  },
+  "extension_counts": {
+    ".doc": 3,
+    ".docx": 103,
+    ".odt": 1,
+    ".pdf": 949,
+    ".pptx": 6,
+    ".xlsx": 3
+  },
+  "source_counts": {
+    "badania.uew.pl": 1,
+    "bon": 26,
+    "international.uew.pl": 1,
+    "jg.uew.pl": 2,
+    "rekrutacja": 164,
+    "rekrutacja.uew.pl": 1,
+    "sd.uew.pl": 1,
+    "szkola-doktorska": 178,
+    "transfer-wiedzy": 20,
+    "uew": 507,
+    "uew.pl": 164
+  },
+  "severity_counts": {
+    "error": 34
+  },
+  "issue_type_counts": {
+    "blob_url_mismatch": 34
+  },
+  "files": {
+    "issues": "public/rag/attachment-extraction-audit-issues.jsonl",
+    "ocr_queue": "public/rag/attachment-ocr-queue.jsonl"
+  }
+}
