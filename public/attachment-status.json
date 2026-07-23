@@ -1,16 +1,16 @@
 {
   "document_count": 1875,
-  "attachment_registry_count": 1575,
+  "attachment_registry_count": 1585,
   "attachment_link_occurrence_count": 1495,
   "unique_attachment_link_url_count": 1095,
   "registry_classifications": {
-    "linked": 893,
+    "linked": 898,
     "missing_url": 3,
     "orphan": 100,
-    "parent_only": 579
+    "parent_only": 584
   },
-  "unregistered_link_count": 202,
-  "institutional_unregistered_link_count": 188,
+  "unregistered_link_count": 197,
+  "institutional_unregistered_link_count": 183,
   "external_reference_count": 14,
   "high_confidence_extraction_candidate_count": 1081,
   "duplicate_group_count": 40,

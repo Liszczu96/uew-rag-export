@@ -16,8 +16,8 @@
     "404": 7
   },
   "candidate_types": {
-    "institutional_unregistered": 188,
-    "registered_linked": 893
+    "institutional_unregistered": 183,
+    "registered_linked": 898
   },
   "sources": {
     "badania.uew.pl": {
@@ -41,10 +41,8 @@
     "sd.ue.wroc.pl": {
       "http_error": 6
     },
-    "sd.uew.pl": {
-      "invalid_content_type": 1
-    },
     "szkola-doktorska": {
+      "invalid_content_type": 1,
       "ok": 177
     },
     "thinktank.ue.wroc.pl": {
@@ -54,11 +52,12 @@
       "ok": 20
     },
     "uew": {
+      "invalid_content_type": 4,
       "ok": 506
     },
     "uew.pl": {
       "http_error": 1,
-      "invalid_content_type": 5,
+      "invalid_content_type": 1,
       "ok": 164
     },
     "www.ue.wroc.pl": {

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T14:06:27.806187+00:00",
+  "generated_at": "2026-07-23T14:22:54.286751+00:00",
   "chunking": {
     "max_words": 350,
     "overlap_words": 50,
@@ -16,14 +16,14 @@
     "web_documents": 1592,
     "attachment_documents": 957,
     "attachment_duplicate_records_merged": 34,
-    "chunks": 8811,
+    "chunks": 8812,
     "exclusions": 357
   },
   "text_counts": {
-    "document_words": 1759167,
-    "document_characters": 12778689,
-    "chunk_words_with_overlap": 1853872,
-    "chunk_characters_with_overlap": 13373615
+    "document_words": 1759410,
+    "document_characters": 12780916,
+    "chunk_words_with_overlap": 1854165,
+    "chunk_characters_with_overlap": 13376168
   },
   "document_kind_counts": {
     "attachment": 957,
@@ -43,7 +43,7 @@
   },
   "chunk_kind_counts": {
     "attachment": 6533,
-    "web": 2278
+    "web": 2279
   },
   "chunk_source_counts": {
     "badania.uew.pl": 3,
@@ -54,11 +54,12 @@
     "sd.uew.pl": 2,
     "szkola-doktorska": 879,
     "transfer-wiedzy": 162,
-    "uew": 5377,
+    "uew": 5378,
     "uew.pl": 1110
   },
   "change_counts": {
-    "unchanged": 2549
+    "changed": 1,
+    "unchanged": 2548
   },
   "exclusion_reason_counts": {
     "excluded_from_rag": 64,
