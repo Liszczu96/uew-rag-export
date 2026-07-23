@@ -1,0 +1,86 @@
+name: Extract UEW attachments batch
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: "Liczba nowych dokumentów w jednej partii"
+        required: true
+        default: "100"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uew-attachment-extraction-batch
+  cancel-in-progress: false
+
+jobs:
+  extract-batch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v6
+
+      - name: Ustaw Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Zainstaluj zależności Python
+        run: pip install -r requirements.txt
+
+      - name: Zainstaluj obsługę starych plików DOC
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y antiword
+
+      - name: Sprawdź składnię skryptu
+        run: python -m py_compile scripts/extract_attachment_text.py
+
+      - name: Wyodrębnij kolejną partię dokumentów
+        run: |
+          python scripts/extract_attachment_text.py \
+            --only-pending \
+            --limit "${{ inputs.batch_size }}" \
+            --max-file-size-mb 50 \
+            --timeout-seconds 120
+
+      - name: Pokaż podsumowanie
+        run: |
+          echo "===== STATUS EKSTRAKCJI ====="
+          cat public/attachment-extraction-status.json
+
+          echo ""
+          echo "===== BŁĘDY ====="
+          if [ -s public/rag/attachment-extraction-errors.jsonl ]; then
+            cat public/rag/attachment-extraction-errors.jsonl
+          else
+            echo "Brak błędów."
+          fi
+
+      - name: Zapisz wyniki w repozytorium
+        run: |
+          git config user.name "uew-rag-export-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add \
+            public/rag/attachment-text-index.jsonl \
+            public/rag/attachment-extraction-state.jsonl \
+            public/rag/attachment-extraction-errors.jsonl \
+            public/changes/attachment-text-changes.jsonl \
+            public/attachment-extraction-status.json
+
+          if [ -d public/rag/attachment-text-blobs ]; then
+            git add public/rag/attachment-text-blobs
+          fi
+
+          if git diff --cached --quiet; then
+            echo "Brak zmian do zapisania."
+          else
+            git commit -m "Extract next UEW attachment batch"
+            git push
+          fi
