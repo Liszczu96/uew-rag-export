@@ -192,9 +192,14 @@ def safe_filename(
 
 def normalize_text(value: Any) -> str:
     text = str(value or "")
-    text = text.replace("\x00", "")
     text = text.replace("\r\n", "\n")
     text = text.replace("\r", "\n")
+    text = text.replace("\t", " ")
+    text = re.sub(
+        r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]",
+        " ",
+        text,
+    )
 
     cleaned_lines: list[str] = []
     previous_blank = False
@@ -1507,6 +1512,8 @@ def select_queue(
     sources: set[str],
     extensions: set[str],
     limit: int | None,
+    processed_urls: set[str],
+    only_pending: bool,
 ) -> list[dict[str, Any]]:
     selected: list[dict[str, Any]] = []
 
@@ -1537,10 +1544,20 @@ def select_queue(
         ):
             continue
 
+        if only_pending and url in processed_urls:
+            continue
+
         selected.append(item)
 
     selected.sort(
         key=lambda item: (
+            0
+            if normalize_url(
+                item.get("effective_url")
+                or item.get("final_url")
+                or item.get("url")
+            ) not in processed_urls
+            else 1,
             int(
                 item.get("declared_filesize")
                 or item.get("content_length")
@@ -1609,6 +1626,14 @@ def build_argument_parser() -> argparse.ArgumentParser:
         type=int,
         default=DEFAULT_TIMEOUT_SECONDS,
         help="Limit czasu odczytu jednego pliku.",
+    )
+    parser.add_argument(
+        "--only-pending",
+        action="store_true",
+        help=(
+            "Przetwarzaj tylko dokumenty, których "
+            "nie ma jeszcze w stanie ekstrakcji."
+        ),
     )
     parser.add_argument(
         "--force",
@@ -1686,12 +1711,15 @@ def main() -> None:
             if str(value).strip()
         },
         limit=arguments.limit,
+        processed_urls=set(state_by_url),
+        only_pending=arguments.only_pending,
     )
 
     full_run = (
         arguments.limit is None
         and not arguments.source
         and not arguments.extension
+        and not arguments.only_pending
     )
 
     max_bytes = (
