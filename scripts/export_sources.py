@@ -703,7 +703,7 @@ def main() -> None:
                     timeout=timeout,
                     request_delay=request_delay,
                     extra_params={
-                        "media_type": "file",
+                        "media_type": "application",
                     },
                 )
 
