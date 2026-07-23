@@ -1,0 +1,58 @@
+name: Resolve UEW attachment review
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uew-attachment-review-resolution
+  cancel-in-progress: false
+
+jobs:
+  resolve-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v6
+
+      - name: Ustaw Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Zainstaluj zależności
+        run: pip install -r requirements.txt
+
+      - name: Sprawdź składnię skryptu
+        run: python -m py_compile scripts/resolve_attachment_review.py
+
+      - name: Wykonaj drugą walidację
+        run: python scripts/resolve_attachment_review.py
+
+      - name: Pokaż podsumowanie
+        run: |
+          echo "===== KOŃCOWY STATUS ZAŁĄCZNIKÓW ====="
+          cat public/attachment-final-status.json
+
+      - name: Zapisz wyniki w repozytorium
+        run: |
+          git config user.name "uew-rag-export-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add \
+            public/rag/attachment-extraction-queue-final.jsonl \
+            public/rag/attachment-resolution-final-review.jsonl \
+            public/rag/attachment-resolution-second-pass.jsonl \
+            public/attachment-final-status.json
+
+          if git diff --cached --quiet; then
+            echo "Brak zmian do zapisania."
+          else
+            git commit -m "Update final UEW attachment queue"
+            git push
+          fi
