@@ -614,15 +614,6 @@ def main() -> None:
         )
     )
 
-    document_mime_types = {
-        str(mime_type).lower()
-        for mime_type in export_config.get(
-            "document_mime_types",
-            [],
-        )
-        if mime_type
-    }
-
     session = requests.Session()
 
     session.headers.update(
@@ -706,15 +697,13 @@ def main() -> None:
             print("  Załączniki z biblioteki mediów")
 
             try:
-                print("    kategoria MIME: application")
-
                 media_items = fetch_collection(
                     session=session,
                     endpoint=endpoint,
                     timeout=timeout,
                     request_delay=request_delay,
                     extra_params={
-                        "media_type": "application",
+                        "media_type": "file",
                     },
                 )
 
@@ -726,11 +715,10 @@ def main() -> None:
                     )
                     for item in media_items
                     if (
-                        not document_mime_types
-                        or str(
+                        item.get("media_type") == "file"
+                        or not str(
                             item.get("mime_type", "")
-                        ).lower()
-                        in document_mime_types
+                        ).startswith("image/")
                     )
                 ]
 
