@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T11:14:20.792387+00:00",
+  "generated_at": "2026-07-23T11:16:11.361984+00:00",
   "chunking": {
     "max_words": 350,
     "overlap_words": 50,
@@ -9,7 +9,7 @@
   "input_counts": {
     "web_records": 1875,
     "attachment_index_records": 1065,
-    "previous_state_records": 0
+    "previous_state_records": 2549
   },
   "corpus_counts": {
     "documents": 2549,
@@ -58,7 +58,7 @@
     "uew.pl": 1110
   },
   "change_counts": {
-    "new": 2549
+    "unchanged": 2549
   },
   "exclusion_reason_counts": {
     "excluded_from_rag": 64,
