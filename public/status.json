@@ -1,18 +1,18 @@
 {
   "project": "uew-rag-export",
-  "generated_at": "2026-07-22T13:02:03.111718+00:00",
+  "generated_at": "2026-07-23T11:33:12.966199+00:00",
   "source_count": 5,
   "document_count": 1875,
   "indexable_document_count": 1592,
-  "attachment_count": 1575,
-  "error_count": 0,
+  "attachment_count": 0,
+  "error_count": 5,
   "sources": [
     {
       "source_id": "transfer-wiedzy",
       "source_name": "Transfer Wiedzy",
       "document_count": 26,
       "indexable_document_count": 24,
-      "attachment_count": 22,
+      "attachment_count": 0,
       "content_types": [
         "posts",
         "pages"
@@ -23,7 +23,7 @@
       "source_name": "Główny portal UEW",
       "document_count": 1445,
       "indexable_document_count": 1189,
-      "attachment_count": 810,
+      "attachment_count": 0,
       "content_types": [
         "posts",
         "pages",
@@ -36,7 +36,7 @@
       "source_name": "Rekrutacja UEW",
       "document_count": 285,
       "indexable_document_count": 270,
-      "attachment_count": 415,
+      "attachment_count": 0,
       "content_types": [
         "posts",
         "pages",
@@ -48,7 +48,7 @@
       "source_name": "Biuro Obsługi Osób z Niepełnosprawnościami",
       "document_count": 15,
       "indexable_document_count": 12,
-      "attachment_count": 50,
+      "attachment_count": 0,
       "content_types": [
         "posts",
         "pages"
@@ -59,7 +59,7 @@
       "source_name": "Szkoła Doktorska",
       "document_count": 104,
       "indexable_document_count": 97,
-      "attachment_count": 278,
+      "attachment_count": 0,
       "content_types": [
         "posts",
         "pages"
