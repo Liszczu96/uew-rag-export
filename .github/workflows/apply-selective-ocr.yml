@@ -1,0 +1,116 @@
+name: Apply selective UEW OCR
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uew-selective-ocr
+  cancel-in-progress: false
+
+jobs:
+  apply-ocr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v6
+
+      - name: Ustaw Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Zainstaluj zależności Python
+        run: pip install -r requirements.txt
+
+      - name: Zainstaluj Tesseract i Poppler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            poppler-utils \
+            tesseract-ocr \
+            tesseract-ocr-pol \
+            tesseract-ocr-eng
+
+      - name: Sprawdź narzędzia OCR
+        run: |
+          pdftoppm -v
+          tesseract --version
+          tesseract --list-langs
+
+      - name: Sprawdź składnię skryptu
+        run: python -m py_compile scripts/apply_selective_ocr.py
+
+      - name: Wykonaj selektywny OCR
+        run: |
+          set +e
+
+          python scripts/apply_selective_ocr.py \
+            --dpi 250 \
+            --timeout-seconds 180
+
+          exit_code=$?
+          echo "$exit_code" > /tmp/ocr_exit_code
+          exit 0
+
+      - name: Pokaż podsumowanie
+        if: always()
+        run: |
+          echo "===== STATUS OCR ====="
+
+          if [ -f public/attachment-ocr-status.json ]; then
+            cat public/attachment-ocr-status.json
+          else
+            echo "Raport OCR nie został utworzony."
+          fi
+
+          echo ""
+          echo "===== BŁĘDY OCR ====="
+
+          if [ -s public/rag/attachment-ocr-errors.jsonl ]; then
+            cat public/rag/attachment-ocr-errors.jsonl
+          else
+            echo "Brak błędów."
+          fi
+
+      - name: Zapisz wyniki OCR
+        if: always()
+        run: |
+          git config user.name "uew-rag-export-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add \
+            public/rag/attachment-text-index.jsonl \
+            public/rag/attachment-extraction-state.jsonl \
+            public/rag/attachment-ocr-results.jsonl \
+            public/rag/attachment-ocr-errors.jsonl \
+            public/changes/attachment-ocr-changes.jsonl \
+            public/attachment-ocr-status.json
+
+          if [ -d public/rag/attachment-text-blobs ]; then
+            git add public/rag/attachment-text-blobs
+          fi
+
+          if git diff --cached --quiet; then
+            echo "Brak zmian do zapisania."
+          else
+            git commit -m "Apply selective UEW OCR"
+            git push
+          fi
+
+      - name: Sprawdź wynik wykonania
+        if: always()
+        run: |
+          exit_code="$(cat /tmp/ocr_exit_code 2>/dev/null || echo 1)"
+
+          if [ "$exit_code" -ne 0 ]; then
+            echo "OCR zakończył się z błędami."
+            exit "$exit_code"
+          fi
+
+          echo "OCR zakończył się poprawnie."
