@@ -62,6 +62,50 @@ def word_count(text: str) -> int:
     return len(re.findall(r"\S+", text))
 
 
+POLISH_STOPWORDS = {
+    "aby", "albo", "bardzo", "bez", "będzie", "być", "dla", "do", "jest",
+    "które", "który", "na", "nie", "oraz", "po", "przez", "się", "są", "to",
+    "w", "we", "z", "za", "że",
+}
+ENGLISH_STOPWORDS = {
+    "and", "are", "as", "at", "be", "by", "for", "from", "in", "is", "it",
+    "of", "on", "or", "that", "the", "this", "to", "with",
+}
+
+
+def detect_language(text: str) -> str | None:
+    sample = normalize_text(text)[:12000]
+    if not sample:
+        return None
+
+    tokens = re.findall(r"[A-Za-zÀ-ž]+", sample.lower(), flags=re.UNICODE)
+    if not tokens:
+        return None
+
+    polish_score = sum(token in POLISH_STOPWORDS for token in tokens)
+    english_score = sum(token in ENGLISH_STOPWORDS for token in tokens)
+    polish_score += sum(character in "ąćęłńóśźż" for character in sample.lower()) * 0.35
+
+    if polish_score == 0 and english_score == 0:
+        return None
+    if polish_score >= english_score * 1.25:
+        return "pl"
+    if english_score >= polish_score * 1.25:
+        return "en"
+    return "pl-en"
+
+
+def clean_title(value: Any, fallback: str = "Dokument") -> str:
+    title = normalize_text(value)
+    if not title:
+        return fallback
+
+    title = title.replace("_", " ")
+    title = re.sub(r"(?<=\\w)-(?=\\w)", "-", title)
+    title = re.sub(r"\s+", " ", title).strip(" -–—_")
+    return title or fallback
+
+
 def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
@@ -201,7 +245,7 @@ def choose_attachment_title(group: list[dict[str, Any]]) -> str:
     stem = Path(filename).stem
     stem = re.sub(r"[_-]+", " ", stem)
     stem = re.sub(r"\s+", " ", stem).strip()
-    return stem or filename
+    return clean_title(stem or filename, "Załącznik")
 
 
 def web_document_record(document: dict[str, Any]) -> dict[str, Any] | None:
@@ -210,7 +254,7 @@ def web_document_record(document: dict[str, Any]) -> dict[str, Any] | None:
         return None
 
     corpus_id = f"web:{document['id']}"
-    title = normalize_text(document.get("title")) or document.get("url") or corpus_id
+    title = clean_title(document.get("title"), document.get("url") or corpus_id)
     url = str(document.get("url") or "").strip()
 
     metadata = {
@@ -239,7 +283,7 @@ def web_document_record(document: dict[str, Any]) -> dict[str, Any] | None:
         "title": title,
         "url": url,
         "url_aliases": [url] if url else [],
-        "language": document.get("language"),
+        "language": document.get("language") or detect_language(text),
         "text": text,
         "char_count": len(text),
         "word_count": word_count(text),
@@ -379,7 +423,7 @@ def attachment_document_record(
         "title": title,
         "url": canonical_url,
         "url_aliases": urls,
-        "language": None,
+        "language": detect_language(text),
         "text": text,
         "char_count": len(text),
         "word_count": word_count(text),
@@ -458,58 +502,357 @@ def assess_attachment_text_quality(
     }
 
 
-def sliding_word_chunks(
+def split_sentences(text: str) -> list[str]:
+    value = normalize_text(text)
+    if not value:
+        return []
+
+    protected = value
+    abbreviations = {
+        "np.": "np<prd>",
+        "nr.": "nr<prd>",
+        "art.": "art<prd>",
+        "ust.": "ust<prd>",
+        "pkt.": "pkt<prd>",
+        "poz.": "poz<prd>",
+        "r.": "r<prd>",
+        "dr.": "dr<prd>",
+        "prof.": "prof<prd>",
+        "mgr.": "mgr<prd>",
+        "inż.": "inż<prd>",
+        "e.g.": "e<prd>g<prd>",
+        "i.e.": "i<prd>e<prd>",
+    }
+    for abbreviation, replacement in abbreviations.items():
+        protected = re.sub(
+            re.escape(abbreviation),
+            replacement,
+            protected,
+            flags=re.IGNORECASE,
+        )
+
+    parts = re.split(
+        r"(?<=[.!?…])\s+(?=[A-ZĄĆĘŁŃÓŚŹŻ0-9„\"(§])",
+        protected,
+    )
+
+    sentences: list[str] = []
+    for part in parts:
+        restored = part.replace("<prd>", ".").strip()
+        if restored:
+            sentences.append(restored)
+
+    return sentences or [value]
+
+
+LIST_ITEM_PATTERN = re.compile(
+    r"^(?:[-*•▪◦–—]|(?:\d+|[A-Za-z]|[IVXLCDM]+)[.)]|§\s*\d+)",
+    re.IGNORECASE,
+)
+NUMBERED_HEADING_PATTERN = re.compile(
+    r"^(?:\d+(?:\.\d+){0,5}[.)]?|§\s*\d+)\s+\S+",
+    re.IGNORECASE,
+)
+GENERIC_SECTION_LABEL_PATTERN = re.compile(
+    r"^(?:strona|page|slajd|slide|arkusz|sheet)\s+\d+$",
+    re.IGNORECASE,
+)
+
+
+def looks_like_heading(line: str) -> bool:
+    value = normalize_text(line)
+    words = re.findall(r"\S+", value)
+
+    if not value or len(words) > 18 or len(value) > 180:
+        return False
+    if LIST_ITEM_PATTERN.match(value):
+        return False
+    if NUMBERED_HEADING_PATTERN.match(value):
+        return True
+    if value.endswith(":") and len(words) <= 14:
+        return True
+    if value.endswith((".", "!", "?", ";", ",")):
+        return False
+
+    alphabetic = [character for character in value if character.isalpha()]
+    if alphabetic:
+        uppercase_ratio = sum(character.isupper() for character in alphabetic) / len(alphabetic)
+        if uppercase_ratio >= 0.72 and len(words) >= 2:
+            return True
+
+    return len(words) <= 10 and value[:1].isupper()
+
+
+def canonical_unit_key(text: str) -> str:
+    value = normalize_text(text).lower()
+    value = re.sub(r"\s+", " ", value)
+    return value.strip()
+
+
+def collapse_repeated_prefix(text: str) -> str:
+    value = normalize_text(text)
+    words = re.findall(r"\S+", value)
+
+    if len(words) < 30:
+        return value
+
+    maximum_block = min(120, len(words) // 3)
+
+    for block_length in range(8, maximum_block + 1):
+        block = words[:block_length]
+        repeat_count = 1
+
+        while (repeat_count + 1) * block_length <= len(words):
+            start = repeat_count * block_length
+            end = start + block_length
+            if words[start:end] != block:
+                break
+            repeat_count += 1
+
+        if repeat_count >= 3:
+            remainder = words[repeat_count * block_length:]
+            return normalize_text(" ".join([*block, *remainder]))
+
+    return value
+
+
+def collapse_repeated_word_runs(text: str) -> str:
+    value = normalize_text(text)
+    words = re.findall(r"\S+", value)
+
+    if len(words) < 16:
+        return value
+
+    result: list[str] = []
+    index = 0
+
+    while index < len(words):
+        matched = False
+        maximum_block = min(24, (len(words) - index) // 4)
+
+        for block_length in range(maximum_block, 1, -1):
+            block = words[index:index + block_length]
+            repeat_count = 1
+
+            while index + (repeat_count + 1) * block_length <= len(words):
+                start = index + repeat_count * block_length
+                end = start + block_length
+                if words[start:end] != block:
+                    break
+                repeat_count += 1
+
+            if repeat_count >= 4:
+                result.extend(block)
+                index += repeat_count * block_length
+                matched = True
+                break
+
+        if not matched:
+            result.append(words[index])
+            index += 1
+
+    return normalize_text(" ".join(result))
+
+
+def split_paragraph_into_units(text: str) -> list[dict[str, Any]]:
+    paragraph = collapse_repeated_word_runs(collapse_repeated_prefix(text))
+    if not paragraph:
+        return []
+
+    lines = [line.strip() for line in paragraph.split("\n") if line.strip()]
+    if not lines:
+        return []
+
+    units: list[dict[str, Any]] = []
+    buffer: list[str] = []
+    list_buffer: list[str] = []
+
+    def flush_buffer() -> None:
+        if not buffer:
+            return
+        value = normalize_text(" ".join(buffer))
+        buffer.clear()
+        if value:
+            units.append({"text": value, "unit_kind": "paragraph"})
+
+    def flush_list() -> None:
+        if not list_buffer:
+            return
+        value = normalize_text("\n".join(list_buffer))
+        list_buffer.clear()
+        if value:
+            units.append({"text": value, "unit_kind": "list"})
+
+    for line in lines:
+        if looks_like_heading(line):
+            flush_buffer()
+            flush_list()
+            units.append({"text": line, "unit_kind": "heading"})
+            continue
+
+        if LIST_ITEM_PATTERN.match(line):
+            flush_buffer()
+            list_buffer.append(line)
+            continue
+
+        if list_buffer:
+            if line[:1].islower() or not re.search(r"[.!?…:]$", list_buffer[-1]):
+                list_buffer[-1] = normalize_text(list_buffer[-1] + " " + line)
+                continue
+            flush_list()
+
+        buffer.append(line)
+
+    flush_buffer()
+    flush_list()
+
+    if len(units) == 1 and units[0]["unit_kind"] == "paragraph":
+        value = units[0]["text"]
+        if word_count(value) > 180:
+            sentences = split_sentences(value)
+            if len(sentences) > 1:
+                return [
+                    {"text": sentence, "unit_kind": "sentence_group"}
+                    for sentence in sentences
+                    if normalize_text(sentence)
+                ]
+
+    return units
+
+
+def natural_units_from_text(
     text: str,
-    max_words: int,
-    overlap_words: int,
-) -> Iterator[str]:
-    words = re.findall(r"\S+", normalize_text(text))
-    if not words:
-        return
+    metadata: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    value = normalize_text(text)
+    if not value:
+        return []
 
-    if len(words) <= max_words:
-        yield " ".join(words)
-        return
+    base_metadata = dict(metadata or {})
+    paragraphs = re.split(r"\n\s*\n+", value)
+    units: list[dict[str, Any]] = []
 
-    step = max_words - overlap_words
-    if step <= 0:
-        raise ValueError("overlap_words musi być mniejsze niż max_words.")
+    for paragraph in paragraphs:
+        for unit in split_paragraph_into_units(paragraph):
+            payload = dict(base_metadata)
+            payload.update(unit)
+            payload["text"] = normalize_text(payload.get("text"))
+            if payload["text"]:
+                units.append(payload)
 
-    start = 0
-    while start < len(words):
-        end = min(start + max_words, len(words))
-        chunk = " ".join(words[start:end]).strip()
-        if chunk:
-            yield chunk
-        if end >= len(words):
-            break
-        start += step
+    return dedupe_natural_units(units)
 
 
-def attachment_segments(
+def dedupe_natural_units(units: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    result: list[dict[str, Any]] = []
+    globally_seen_long_units: set[str] = set()
+    previous_key: str | None = None
+
+    for unit in units:
+        text = normalize_text(unit.get("text"))
+        key = canonical_unit_key(text)
+        if not key:
+            continue
+
+        if key == previous_key:
+            continue
+
+        unit_words = word_count(text)
+        if unit_words >= 18 and key in globally_seen_long_units:
+            continue
+
+        if unit_words >= 18:
+            globally_seen_long_units.add(key)
+
+        payload = dict(unit)
+        payload["text"] = text
+        result.append(payload)
+        previous_key = key
+
+    return result
+
+
+def split_oversized_unit(
+    unit: dict[str, Any],
+    hard_max_words: int,
+) -> list[dict[str, Any]]:
+    text = normalize_text(unit.get("text"))
+    if word_count(text) <= hard_max_words:
+        return [unit]
+
+    sentences = split_sentences(text)
+    if len(sentences) <= 1:
+        sentences = [
+            normalize_text(part)
+            for part in re.split(r"(?<=[;:])\s+", text)
+            if normalize_text(part)
+        ]
+
+    if len(sentences) <= 1:
+        words = re.findall(r"\S+", text)
+        pieces: list[dict[str, Any]] = []
+        for start in range(0, len(words), hard_max_words):
+            payload = dict(unit)
+            payload["text"] = " ".join(words[start:start + hard_max_words])
+            payload["forced_split"] = True
+            pieces.append(payload)
+        return pieces
+
+    pieces: list[dict[str, Any]] = []
+    buffer: list[str] = []
+    buffer_words = 0
+
+    for sentence in sentences:
+        sentence_words = word_count(sentence)
+
+        if sentence_words > hard_max_words:
+            if buffer:
+                payload = dict(unit)
+                payload["text"] = normalize_text(" ".join(buffer))
+                payload["forced_split"] = True
+                pieces.append(payload)
+                buffer = []
+                buffer_words = 0
+
+            sentence_tokens = re.findall(r"\S+", sentence)
+            for start in range(0, len(sentence_tokens), hard_max_words):
+                payload = dict(unit)
+                payload["text"] = " ".join(
+                    sentence_tokens[start:start + hard_max_words]
+                )
+                payload["forced_split"] = True
+                pieces.append(payload)
+            continue
+
+        if buffer and buffer_words + sentence_words > hard_max_words:
+            payload = dict(unit)
+            payload["text"] = normalize_text(" ".join(buffer))
+            payload["forced_split"] = True
+            pieces.append(payload)
+            buffer = []
+            buffer_words = 0
+
+        buffer.append(sentence)
+        buffer_words += sentence_words
+
+    if buffer:
+        payload = dict(unit)
+        payload["text"] = normalize_text(" ".join(buffer))
+        payload["forced_split"] = True
+        pieces.append(payload)
+
+    return pieces
+
+
+def attachment_natural_units(
     blob: dict[str, Any],
     fallback_text: str,
-    max_words: int,
-    overlap_words: int,
 ) -> list[dict[str, Any]]:
     sections = blob.get("sections")
     if not isinstance(sections, list) or not sections:
-        return [
-            {
-                "text": chunk,
-                "section_ids": [],
-                "section_labels": [],
-                "section_kind": None,
-                "page_start": None,
-                "page_end": None,
-                "slide_start": None,
-                "slide_end": None,
-                "sheet_names": [],
-            }
-            for chunk in sliding_word_chunks(fallback_text, max_words, overlap_words)
-        ]
+        return natural_units_from_text(fallback_text)
 
-    segments: list[dict[str, Any]] = []
+    units: list[dict[str, Any]] = []
 
     for section in sections:
         if not isinstance(section, dict):
@@ -519,47 +862,178 @@ def attachment_segments(
         if not section_text:
             continue
 
-        section_id = str(section.get("section_id") or "")
-        section_label = str(section.get("label") or "")
-        section_kind = section.get("kind")
         section_metadata = section.get("metadata")
         if not isinstance(section_metadata, dict):
             section_metadata = {}
 
-        for chunk in sliding_word_chunks(section_text, max_words, overlap_words):
-            page_number = section_metadata.get("page_number")
-            slide_number = section_metadata.get("slide_number")
-            sheet_name = section_metadata.get("sheet_name")
+        metadata = {
+            "section_id": str(section.get("section_id") or ""),
+            "section_label": normalize_text(section.get("label")),
+            "section_kind": section.get("kind"),
+            "page_number": section_metadata.get("page_number"),
+            "slide_number": section_metadata.get("slide_number"),
+            "sheet_name": section_metadata.get("sheet_name"),
+        }
+        units.extend(natural_units_from_text(section_text, metadata))
 
-            segments.append(
-                {
-                    "text": chunk,
-                    "section_ids": [section_id] if section_id else [],
-                    "section_labels": [section_label] if section_label else [],
-                    "section_kind": section_kind,
-                    "page_start": page_number,
-                    "page_end": page_number,
-                    "slide_start": slide_number,
-                    "slide_end": slide_number,
-                    "sheet_names": [sheet_name] if sheet_name else [],
-                }
+    return dedupe_natural_units(units) or natural_units_from_text(fallback_text)
+
+
+def aggregate_segment_metadata(units: list[dict[str, Any]]) -> dict[str, Any]:
+    section_ids = compact_unique_strings(unit.get("section_id") for unit in units)
+    section_labels = compact_unique_strings(unit.get("section_label") for unit in units)
+    section_kinds = compact_unique_strings(unit.get("section_kind") for unit in units)
+    pages = sorted(
+        {
+            int(unit["page_number"])
+            for unit in units
+            if isinstance(unit.get("page_number"), int)
+        }
+    )
+    slides = sorted(
+        {
+            int(unit["slide_number"])
+            for unit in units
+            if isinstance(unit.get("slide_number"), int)
+        }
+    )
+    sheets = compact_unique_strings(unit.get("sheet_name") for unit in units)
+    headings = compact_unique_strings(
+        unit.get("text")
+        for unit in units
+        if unit.get("unit_kind") == "heading"
+    )
+
+    meaningful_labels = [
+        label
+        for label in section_labels
+        if not GENERIC_SECTION_LABEL_PATTERN.fullmatch(label)
+    ]
+    context_path = compact_unique_strings([*meaningful_labels, *headings])
+
+    return {
+        "section_ids": section_ids,
+        "section_labels": section_labels,
+        "section_kind": section_kinds[0] if len(section_kinds) == 1 else None,
+        "page_start": min(pages) if pages else None,
+        "page_end": max(pages) if pages else None,
+        "slide_start": min(slides) if slides else None,
+        "slide_end": max(slides) if slides else None,
+        "sheet_names": sheets,
+        "context_path": context_path,
+        "semantic_unit_count": len(units),
+        "forced_split": any(bool(unit.get("forced_split")) for unit in units),
+        "unit_kinds": compact_unique_strings(unit.get("unit_kind") for unit in units),
+    }
+
+
+def structure_aware_segments(
+    units: list[dict[str, Any]],
+    target_words: int,
+) -> list[dict[str, Any]]:
+    hard_max_words = max(650, target_words * 2)
+    minimum_preferred_words = max(45, target_words // 4)
+
+    expanded: list[dict[str, Any]] = []
+    for unit in units:
+        expanded.extend(split_oversized_unit(unit, hard_max_words))
+
+    segments: list[dict[str, Any]] = []
+    current: list[dict[str, Any]] = []
+    current_words = 0
+
+    def flush() -> None:
+        nonlocal current, current_words
+        if not current:
+            return
+
+        text = normalize_text("\n\n".join(unit["text"] for unit in current))
+        if text:
+            metadata = aggregate_segment_metadata(current)
+            metadata["text"] = text
+            segments.append(metadata)
+
+        current = []
+        current_words = 0
+
+    for unit in expanded:
+        unit_words = word_count(unit.get("text"))
+        unit_kind = str(unit.get("unit_kind") or "paragraph")
+        section_kind = str(unit.get("section_kind") or "")
+
+        strong_boundary = unit_kind == "heading" or section_kind in {"slide", "sheet"}
+
+        if current and strong_boundary and current_words >= minimum_preferred_words:
+            flush()
+
+        if current and current_words + unit_words > hard_max_words:
+            flush()
+
+        if (
+            current
+            and current_words >= target_words
+            and unit_kind not in {"list", "sentence_group"}
+        ):
+            flush()
+
+        current.append(unit)
+        current_words += unit_words
+
+        if current_words >= hard_max_words:
+            flush()
+
+    flush()
+
+    if len(segments) >= 2:
+        last_words = word_count(segments[-1]["text"])
+        previous_words = word_count(segments[-2]["text"])
+        if last_words < 35 and previous_words + last_words <= hard_max_words:
+            merged_text = normalize_text(
+                segments[-2]["text"] + "\n\n" + segments[-1]["text"]
             )
-
-    if not segments:
-        return [
-            {
-                "text": chunk,
-                "section_ids": [],
-                "section_labels": [],
-                "section_kind": None,
-                "page_start": None,
-                "page_end": None,
-                "slide_start": None,
-                "slide_end": None,
-                "sheet_names": [],
-            }
-            for chunk in sliding_word_chunks(fallback_text, max_words, overlap_words)
-        ]
+            merged_units = []
+            for key in (
+                "section_ids",
+                "section_labels",
+                "sheet_names",
+                "context_path",
+                "unit_kinds",
+            ):
+                segments[-2][key] = compact_unique_strings(
+                    [*(segments[-2].get(key) or []), *(segments[-1].get(key) or [])]
+                )
+            segments[-2]["text"] = merged_text
+            segments[-2]["semantic_unit_count"] = int(
+                segments[-2].get("semantic_unit_count") or 0
+            ) + int(segments[-1].get("semantic_unit_count") or 0)
+            segments[-2]["forced_split"] = bool(
+                segments[-2].get("forced_split") or segments[-1].get("forced_split")
+            )
+            page_values = [
+                value
+                for value in (
+                    segments[-2].get("page_start"),
+                    segments[-2].get("page_end"),
+                    segments[-1].get("page_start"),
+                    segments[-1].get("page_end"),
+                )
+                if isinstance(value, int)
+            ]
+            slide_values = [
+                value
+                for value in (
+                    segments[-2].get("slide_start"),
+                    segments[-2].get("slide_end"),
+                    segments[-1].get("slide_start"),
+                    segments[-1].get("slide_end"),
+                )
+                if isinstance(value, int)
+            ]
+            segments[-2]["page_start"] = min(page_values) if page_values else None
+            segments[-2]["page_end"] = max(page_values) if page_values else None
+            segments[-2]["slide_start"] = min(slide_values) if slide_values else None
+            segments[-2]["slide_end"] = max(slide_values) if slide_values else None
+            segments.pop()
 
     return segments
 
@@ -570,49 +1044,36 @@ def build_chunks(
     overlap_words: int,
     blob: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
+    del overlap_words  # Zachowane wyłącznie dla zgodności z istniejącymi workflowami.
+
     if document["kind"] == "attachment" and blob is not None:
-        segments = attachment_segments(
-            blob=blob,
-            fallback_text=document["text"],
-            max_words=max_words,
-            overlap_words=overlap_words,
-        )
+        units = attachment_natural_units(blob, document["text"])
     else:
-        segments = [
-            {
-                "text": chunk,
-                "section_ids": [],
-                "section_labels": [],
-                "section_kind": None,
-                "page_start": None,
-                "page_end": None,
-                "slide_start": None,
-                "slide_end": None,
-                "sheet_names": [],
-            }
-            for chunk in sliding_word_chunks(
-                document["text"],
-                max_words,
-                overlap_words,
-            )
-        ]
+        units = natural_units_from_text(document["text"])
+
+    segments = structure_aware_segments(
+        units=units,
+        target_words=max_words,
+    )
 
     chunks: list[dict[str, Any]] = []
-    total = len(segments)
 
-    for index, segment in enumerate(segments):
-        chunk_text = normalize_text(segment["text"])
+    for segment in segments:
+        chunk_text = normalize_text(segment.get("text"))
         if word_count(chunk_text) < 5:
             continue
 
-        prefix = f"{document['title']}\n\n"
-        embedding_text = prefix + chunk_text
-        chunk_id = f"{document['id']}:chunk:{index + 1:04d}"
+        context_path = segment.get("context_path") or []
+        embedding_parts = [document["title"]]
+        if context_path:
+            embedding_parts.append(" > ".join(context_path))
+        embedding_parts.append(chunk_text)
+        embedding_text = "\n\n".join(embedding_parts)
 
         chunks.append(
             {
                 "schema_version": SCHEMA_VERSION,
-                "id": chunk_id,
+                "id": "",
                 "document_id": document["id"],
                 "document_kind": document["kind"],
                 "source_id": document["source_id"],
@@ -621,10 +1082,10 @@ def build_chunks(
                 "title": document["title"],
                 "url": document["url"],
                 "url_aliases": document.get("url_aliases") or [],
-                "language": document.get("language"),
-                "chunk_index": index,
-                "chunk_number": index + 1,
-                "chunk_count": total,
+                "language": document.get("language") or detect_language(chunk_text),
+                "chunk_index": 0,
+                "chunk_number": 0,
+                "chunk_count": 0,
                 "text": chunk_text,
                 "embedding_text": embedding_text,
                 "char_count": len(chunk_text),
@@ -642,6 +1103,11 @@ def build_chunks(
                 "slide_start": segment.get("slide_start"),
                 "slide_end": segment.get("slide_end"),
                 "sheet_names": segment.get("sheet_names") or [],
+                "context_path": context_path,
+                "semantic_unit_count": segment.get("semantic_unit_count") or 0,
+                "unit_kinds": segment.get("unit_kinds") or [],
+                "forced_split": bool(segment.get("forced_split")),
+                "chunking_method": "structure_aware_v2",
             }
         )
 
@@ -652,7 +1118,6 @@ def build_chunks(
         chunk["id"] = f"{document['id']}:chunk:{index + 1:04d}"
 
     return chunks
-
 
 def build_state_record(
     document: dict[str, Any],
@@ -774,15 +1239,31 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Buduje zunifikowany korpus i chunki RAG dla treści UEW."
     )
-    parser.add_argument("--max-words", type=int, default=350)
-    parser.add_argument("--overlap-words", type=int, default=50)
+    parser.add_argument(
+        "--max-words",
+        type=int,
+        default=350,
+        help=(
+            "Docelowa wielkość chunku. Granice naturalnych jednostek mają "
+            "pierwszeństwo; twardy limit wynosi co najmniej 650 słów."
+        ),
+    )
+    parser.add_argument(
+        "--overlap-words",
+        type=int,
+        default=0,
+        help=(
+            "Parametr zachowany dla zgodności. Chunkowanie strukturalne nie "
+            "kopiuje części słów między chunkami."
+        ),
+    )
     arguments = parser.parse_args()
 
     if arguments.max_words < 50:
         raise ValueError("--max-words musi wynosić co najmniej 50.")
     if arguments.overlap_words < 0:
         raise ValueError("--overlap-words nie może być ujemne.")
-    if arguments.overlap_words >= arguments.max_words:
+    if arguments.overlap_words >= arguments.max_words and arguments.overlap_words != 0:
         raise ValueError("--overlap-words musi być mniejsze niż --max-words.")
 
     generated_at = utc_now()
@@ -993,9 +1474,22 @@ def main() -> None:
         "schema_version": SCHEMA_VERSION,
         "generated_at": generated_at,
         "chunking": {
-            "max_words": arguments.max_words,
-            "overlap_words": arguments.overlap_words,
-            "embedding_prefix": "document_title",
+            "method": "structure_aware_v2",
+            "target_words": arguments.max_words,
+            "hard_max_words": max(650, arguments.max_words * 2),
+            "requested_overlap_words": arguments.overlap_words,
+            "applied_overlap_words": 0,
+            "natural_boundaries": [
+                "section",
+                "heading",
+                "paragraph",
+                "list",
+                "sentence",
+                "page",
+                "slide",
+                "sheet",
+            ],
+            "embedding_prefix": "document_title_and_context_path",
         },
         "input_counts": {
             "web_records": len(source_documents),
@@ -1013,8 +1507,8 @@ def main() -> None:
         "text_counts": {
             "document_words": sum(record["word_count"] for record in corpus_documents),
             "document_characters": sum(record["char_count"] for record in corpus_documents),
-            "chunk_words_with_overlap": sum(record["word_count"] for record in all_chunks),
-            "chunk_characters_with_overlap": sum(record["char_count"] for record in all_chunks),
+            "chunk_words_total": sum(record["word_count"] for record in all_chunks),
+            "chunk_characters_total": sum(record["char_count"] for record in all_chunks),
         },
         "document_kind_counts": dict(sorted(document_kind_counts.items())),
         "document_source_counts": dict(sorted(document_source_counts.items())),
