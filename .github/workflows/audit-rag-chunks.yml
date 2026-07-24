@@ -1,0 +1,76 @@
+name: Audit UEW RAG chunks
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uew-rag-chunk-audit
+  cancel-in-progress: false
+
+jobs:
+  audit-chunks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v6
+
+      - name: Ustaw Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Sprawdź składnię skryptu
+        run: python -m py_compile scripts/audit_rag_chunks.py
+
+      - name: Wykonaj audyt jakości chunków
+        run: |
+          set +e
+          python scripts/audit_rag_chunks.py
+          exit_code=$?
+          echo "$exit_code" > /tmp/audit_exit_code
+          exit 0
+
+      - name: Pokaż raport
+        if: always()
+        run: |
+          echo "===== AUDYT JAKOŚCI RAG ====="
+
+          if [ -f public/rag-quality-status.json ]; then
+            cat public/rag-quality-status.json
+          else
+            echo "Raport nie został utworzony."
+          fi
+
+      - name: Zapisz wyniki audytu
+        if: always()
+        run: |
+          git config user.name "uew-rag-export-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add \
+            public/rag-quality-status.json \
+            public/rag/rag-quality-issues.jsonl
+
+          if git diff --cached --quiet; then
+            echo "Brak zmian do zapisania."
+          else
+            git commit -m "Audit UEW RAG chunk quality"
+            git push
+          fi
+
+      - name: Sprawdź wynik audytu
+        if: always()
+        run: |
+          exit_code="$(cat /tmp/audit_exit_code 2>/dev/null || echo 1)"
+
+          if [ "$exit_code" -ne 0 ]; then
+            echo "Audyt wykrył błędy strukturalne."
+            exit "$exit_code"
+          fi
+
+          echo "Audyt jakości chunków zakończył się poprawnie."
