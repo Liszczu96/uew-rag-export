@@ -1,10 +1,23 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T05:39:48.529242+00:00",
+  "generated_at": "2026-07-24T08:47:30.612080+00:00",
   "chunking": {
-    "max_words": 350,
-    "overlap_words": 50,
-    "embedding_prefix": "document_title"
+    "method": "structure_aware_v2",
+    "target_words": 350,
+    "hard_max_words": 700,
+    "requested_overlap_words": 50,
+    "applied_overlap_words": 0,
+    "natural_boundaries": [
+      "section",
+      "heading",
+      "paragraph",
+      "list",
+      "sentence",
+      "page",
+      "slide",
+      "sheet"
+    ],
+    "embedding_prefix": "document_title_and_context_path"
   },
   "input_counts": {
     "web_records": 1875,
@@ -16,14 +29,14 @@
     "web_documents": 1592,
     "attachment_documents": 957,
     "attachment_duplicate_records_merged": 34,
-    "chunks": 8812,
+    "chunks": 6831,
     "exclusions": 357
   },
   "text_counts": {
     "document_words": 1759410,
     "document_characters": 12780916,
-    "chunk_words_with_overlap": 1854165,
-    "chunk_characters_with_overlap": 13376168
+    "chunk_words_total": 1735249,
+    "chunk_characters_total": 12631316
   },
   "document_kind_counts": {
     "attachment": 957,
@@ -42,23 +55,24 @@
     "uew.pl": 150
   },
   "chunk_kind_counts": {
-    "attachment": 6533,
-    "web": 2279
+    "attachment": 3484,
+    "web": 3347
   },
   "chunk_source_counts": {
-    "badania.uew.pl": 3,
-    "bon": 270,
-    "international.uew.pl": 1,
-    "jg.uew.pl": 3,
-    "rekrutacja": 1004,
-    "sd.uew.pl": 2,
-    "szkola-doktorska": 879,
-    "transfer-wiedzy": 162,
-    "uew": 5378,
-    "uew.pl": 1110
+    "badania.uew.pl": 1,
+    "bon": 169,
+    "international.uew.pl": 3,
+    "jg.uew.pl": 7,
+    "rekrutacja": 1123,
+    "sd.uew.pl": 1,
+    "szkola-doktorska": 714,
+    "transfer-wiedzy": 129,
+    "uew": 4146,
+    "uew.pl": 538
   },
   "change_counts": {
-    "unchanged": 2549
+    "changed": 2498,
+    "unchanged": 51
   },
   "exclusion_reason_counts": {
     "excluded_from_rag": 64,
