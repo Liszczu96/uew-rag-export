@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T11:28:38.107925+00:00",
-  "complete": false,
+  "generated_at": "2026-07-24T13:08:18.800446+00:00",
+  "complete": true,
   "chunk_count": 6831,
   "document_count": 2549,
   "unique_chunk_id_count": 6831,
@@ -28,11 +28,9 @@
     "C": 129
   },
   "severity_counts": {
-    "error": 4716,
     "warning": 1930
   },
   "issue_type_counts": {
-    "embedding_text_mismatch": 4716,
     "generic_title": 182,
     "high_internal_repetition": 16,
     "missing_language": 1,
