@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-24T11:28:38.107925+00:00",
+  "complete": false,
+  "chunk_count": 6831,
+  "document_count": 2549,
+  "unique_chunk_id_count": 6831,
+  "duplicate_text_group_count": 72,
+  "duplicate_text_extra_copy_count": 81,
+  "kind_counts": {
+    "attachment": 3484,
+    "web": 3347
+  },
+  "source_counts": {
+    "badania.uew.pl": 1,
+    "bon": 169,
+    "international.uew.pl": 3,
+    "jg.uew.pl": 7,
+    "rekrutacja": 1123,
+    "sd.uew.pl": 1,
+    "szkola-doktorska": 714,
+    "transfer-wiedzy": 129,
+    "uew": 4146,
+    "uew.pl": 538
+  },
+  "priority_counts": {
+    "A": 6702,
+    "C": 129
+  },
+  "severity_counts": {
+    "error": 4716,
+    "warning": 1930
+  },
+  "issue_type_counts": {
+    "embedding_text_mismatch": 4716,
+    "generic_title": 182,
+    "high_internal_repetition": 16,
+    "missing_language": 1,
+    "title_contains_newline": 92,
+    "title_contains_underscore": 1636,
+    "very_short_chunk": 3
+  },
+  "files": {
+    "chunks": "public/rag/chunks.jsonl",
+    "issues": "public/rag/rag-quality-issues.jsonl"
+  }
+}
