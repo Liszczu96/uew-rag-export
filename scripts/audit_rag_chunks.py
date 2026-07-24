@@ -313,7 +313,32 @@ def main() -> None:
                     )
                 )
 
-        expected_embedding_text = f"{title}\n\n{text}"
+        context_path = record.get("context_path") or []
+
+        if not isinstance(context_path, list):
+            issues.append(
+                issue(
+                    "error",
+                    "invalid_context_path",
+                    record,
+                    actual_type=type(context_path).__name__,
+                )
+            )
+            context_path = []
+
+        embedding_parts = [title]
+
+        normalized_context_path = [
+            str(value).strip()
+            for value in context_path
+            if str(value).strip()
+        ]
+
+        if normalized_context_path:
+            embedding_parts.append(" > ".join(normalized_context_path))
+
+        embedding_parts.append(text)
+        expected_embedding_text = "\n\n".join(embedding_parts)
 
         if embedding_text != expected_embedding_text:
             issues.append(
@@ -321,6 +346,9 @@ def main() -> None:
                     "error",
                     "embedding_text_mismatch",
                     record,
+                    expected=expected_embedding_text,
+                    actual=embedding_text,
+                    context_path=normalized_context_path,
                 )
             )
 
